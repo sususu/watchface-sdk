@@ -46,18 +46,24 @@ class HWMusicViewController: UIViewController {
         }
 
         // Write music files to the music/mp3 subdirectory
-        if let music1Path = Bundle.main.path(forResource: "那女孩对我说", ofType: "mp3"),
-           let music2Path = Bundle.main.path(forResource: "键盘打字", ofType: "mp3") {
+        if let music1Path = Bundle.main.path(forResource: "Ranganayaki", ofType: "mp3"),
+           let music2Path = Bundle.main.path(forResource: "Sufiyana", ofType: "mp3"),
+           let music3Path = Bundle.main.path(forResource: "World Tour", ofType: "mp3") {
             
             let music1Data = try? Data(contentsOf: URL(fileURLWithPath: music1Path))
             let music2Data = try? Data(contentsOf: URL(fileURLWithPath: music2Path))
+            let music3Data = try? Data(contentsOf: URL(fileURLWithPath: music3Path))
             
             if let music1Data = music1Data {
-                try? music1Data.write(to: URL(fileURLWithPath: musicDirectory.appending("/那女孩对我说.mp3")), options: .atomic)
+                try? music1Data.write(to: URL(fileURLWithPath: musicDirectory.appending("/Ranganayaki.mp3")), options: .atomic)
             }
             
             if let music2Data = music2Data {
-                try? music2Data.write(to: URL(fileURLWithPath: musicDirectory.appending("/键盘打字.mp3")), options: .atomic)
+                try? music2Data.write(to: URL(fileURLWithPath: musicDirectory.appending("/Sufiyana.mp3")), options: .atomic)
+            }
+            
+            if let music3Data = music2Data {
+                try? music3Data.write(to: URL(fileURLWithPath: musicDirectory.appending("/World Tour.mp3")), options: .atomic)
             }
         }
         

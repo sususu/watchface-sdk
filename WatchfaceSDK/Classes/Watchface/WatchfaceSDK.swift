@@ -35,6 +35,7 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
     ///   - progressCallback: Synchronization progress callback
     ///   - finishCallback: Synchronization completes the callback
     @objc public func setPictures(devIdentifier: String,compressSuccessCallback: @escaping QjsCompresSuccessCallback, albums: Array<QjsAlbumModel>, progressCallback: @escaping QjsWatchfaceProgressCallback,finishCallback: @escaping QjsWatchfaceFinishCallback) {
+        assert(hadInit, "Please call WatchfaceSDK.getInstance().initSDK(application: UIApplication) before using any API")
         
         DispatchQueue.global().async { [weak self] in
             WatchfaceSDK.instance.ProgressCallback = progressCallback
@@ -104,6 +105,7 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
     ///   - progressCallback: Synchronization progress callback
     ///   - finishCallback: Synchronization completes the callback
     @objc public func setMusicFiles(devIdentifier: String, musicFilePath: URL, compressCallback: @escaping QjsCompresSuccessCallback , progressCallback: @escaping QjsWatchfaceProgressCallback,finishCallback: @escaping QjsWatchfaceFinishCallback) {
+        assert(hadInit, "Please call WatchfaceSDK.getInstance().initSDK(application: UIApplication) before using any API")
         
         DispatchQueue.global().async { [weak self] in
             WatchfaceSDK.instance.ProgressCallback = progressCallback

@@ -10,7 +10,8 @@ PODS:
   - SDWebImage/Core (5.19.6)
   - SnapKit (5.6.0)
   - SSZipArchive (2.4.3)
-  - WatchfaceSDK (1.0.0):
+  - WatchfaceSDK (1.0.2):
+    - SSZipArchive
     - Zip (~> 2.1)
   - Zip (2.1.2)
 
@@ -19,7 +20,6 @@ DEPENDENCIES:
   - RSColorPicker
   - SDWebImage
   - SnapKit
-  - SSZipArchive
   - WatchfaceSDK (from `../`)
 
 SPEC REPOS:
@@ -41,9 +41,9 @@ SPEC CHECKSUMS:
   SDWebImage: a79252b60f4678812d94316c91da69ec83089c9f
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
-  WatchfaceSDK: a64674d36d815ee29f23140b86a30002461d0c26
+  WatchfaceSDK: b2de2bc7c65f2b1ac050d36eaccad1472eeb99e0
   Zip: b3fef584b147b6e582b2256a9815c897d60ddc67
 
-PODFILE CHECKSUM: f01210e28a643a0d820ce2d3217db9cbd6e01781
+PODFILE CHECKSUM: d3461d4b4714ede00b56a63b78f79cfe03f7f106
 
 COCOAPODS: 1.14.3

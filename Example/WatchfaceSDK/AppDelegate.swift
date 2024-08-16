@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         HwBluetoothSDK.sharedInstance().initSDK()
         WatchfaceSDK.getInstance().initSDK()
+        HwOTAUpdateManager.shared.initSDK()
         
         return true
     }

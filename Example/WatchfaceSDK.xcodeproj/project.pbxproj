@@ -15,6 +15,11 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		916A3B5E98210F4F980B1C2A /* Pods_WatchfaceSDK_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 705F59C4E63D7D5B250D00F9 /* Pods_WatchfaceSDK_Tests.framework */; };
+		9C02EBAD2C6F302A00033891 /* HWOTAUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C02EBAC2C6F302A00033891 /* HWOTAUpdateViewController.swift */; };
+		9C02EBAF2C6F30FB00033891 /* HS02_KW266_TA_from_V1.0.6B66_To_V1.0.6B67.zip in Resources */ = {isa = PBXBuildFile; fileRef = 9C02EBAE2C6F30FB00033891 /* HS02_KW266_TA_from_V1.0.6B66_To_V1.0.6B67.zip */; };
+		9C02EBB32C6F313300033891 /* World Tour.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9C02EBB02C6F313300033891 /* World Tour.mp3 */; };
+		9C02EBB42C6F313300033891 /* Ranganayaki.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9C02EBB12C6F313300033891 /* Ranganayaki.mp3 */; };
+		9C02EBB52C6F313300033891 /* Sufiyana.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9C02EBB22C6F313300033891 /* Sufiyana.mp3 */; };
 		9C4C78422C64695D00C0FD17 /* HwBluetoothSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C4C78412C64695C00C0FD17 /* HwBluetoothSDK.framework */; };
 		9C4C78442C646C9A00C0FD17 /* HWScanDeviceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4C78432C646C9A00C0FD17 /* HWScanDeviceCell.swift */; };
 		9C4C784A2C646CD200C0FD17 /* JW_HS01WF005.zip in Resources */ = {isa = PBXBuildFile; fileRef = 9C4C78462C646CD100C0FD17 /* JW_HS01WF005.zip */; };
@@ -23,9 +28,7 @@
 		9C4C784D2C646CD200C0FD17 /* HWOnlineDialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4C78492C646CD100C0FD17 /* HWOnlineDialViewController.swift */; };
 		9C954BF42C65B5C300B13BF6 /* HWAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C954BF32C65B5C300B13BF6 /* HWAlbumViewController.swift */; };
 		9C954BF62C65B5E700B13BF6 /* HWMusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C954BF52C65B5E700B13BF6 /* HWMusicViewController.swift */; };
-		9C954BFD2C65BFE100B13BF6 /* 那女孩对我说.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9C954BF92C65BFE000B13BF6 /* 那女孩对我说.mp3 */; };
 		9C954BFE2C65BFE100B13BF6 /* IMG_4611.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C954BFA2C65BFE100B13BF6 /* IMG_4611.png */; };
-		9C954BFF2C65BFE100B13BF6 /* 键盘打字.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9C954BFB2C65BFE100B13BF6 /* 键盘打字.mp3 */; };
 		9C954C002C65BFE100B13BF6 /* IMG_4585.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C954BFC2C65BFE100B13BF6 /* IMG_4585.png */; };
 		9C9C6F942C6B7DF5001F4B62 /* FD722AA7.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9C9C6F932C6B7DF5001F4B62 /* FD722AA7.gif */; };
 /* End PBXBuildFile section */
@@ -57,6 +60,11 @@
 		705F59C4E63D7D5B250D00F9 /* Pods_WatchfaceSDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatchfaceSDK_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83A9A0B7F4973E3CADE4B86B /* Pods-WatchfaceSDK_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchfaceSDK_Example.release.xcconfig"; path = "Target Support Files/Pods-WatchfaceSDK_Example/Pods-WatchfaceSDK_Example.release.xcconfig"; sourceTree = "<group>"; };
 		85DB7A4DD8B36CC40D011B08 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		9C02EBAC2C6F302A00033891 /* HWOTAUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HWOTAUpdateViewController.swift; sourceTree = "<group>"; };
+		9C02EBAE2C6F30FB00033891 /* HS02_KW266_TA_from_V1.0.6B66_To_V1.0.6B67.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = HS02_KW266_TA_from_V1.0.6B66_To_V1.0.6B67.zip; sourceTree = "<group>"; };
+		9C02EBB02C6F313300033891 /* World Tour.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "World Tour.mp3"; sourceTree = "<group>"; };
+		9C02EBB12C6F313300033891 /* Ranganayaki.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Ranganayaki.mp3; sourceTree = "<group>"; };
+		9C02EBB22C6F313300033891 /* Sufiyana.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Sufiyana.mp3; sourceTree = "<group>"; };
 		9C4C78412C64695C00C0FD17 /* HwBluetoothSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HwBluetoothSDK.framework; sourceTree = "<group>"; };
 		9C4C78432C646C9A00C0FD17 /* HWScanDeviceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HWScanDeviceCell.swift; sourceTree = "<group>"; };
 		9C4C78462C646CD100C0FD17 /* JW_HS01WF005.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = JW_HS01WF005.zip; sourceTree = "<group>"; };
@@ -65,9 +73,7 @@
 		9C4C78492C646CD100C0FD17 /* HWOnlineDialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HWOnlineDialViewController.swift; sourceTree = "<group>"; };
 		9C954BF32C65B5C300B13BF6 /* HWAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HWAlbumViewController.swift; sourceTree = "<group>"; };
 		9C954BF52C65B5E700B13BF6 /* HWMusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HWMusicViewController.swift; sourceTree = "<group>"; };
-		9C954BF92C65BFE000B13BF6 /* 那女孩对我说.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "那女孩对我说.mp3"; sourceTree = "<group>"; };
 		9C954BFA2C65BFE100B13BF6 /* IMG_4611.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IMG_4611.png; sourceTree = "<group>"; };
-		9C954BFB2C65BFE100B13BF6 /* 键盘打字.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "键盘打字.mp3"; sourceTree = "<group>"; };
 		9C954BFC2C65BFE100B13BF6 /* IMG_4585.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IMG_4585.png; sourceTree = "<group>"; };
 		9C9C6F932C6B7DF5001F4B62 /* FD722AA7.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = FD722AA7.gif; sourceTree = "<group>"; };
 		A90A132746CF712E89F0025E /* Pods-WatchfaceSDK_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchfaceSDK_Example.debug.xcconfig"; path = "Target Support Files/Pods-WatchfaceSDK_Example/Pods-WatchfaceSDK_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -172,9 +178,11 @@
 		9C4C78452C646CD100C0FD17 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				9C02EBB12C6F313300033891 /* Ranganayaki.mp3 */,
+				9C02EBB22C6F313300033891 /* Sufiyana.mp3 */,
+				9C02EBB02C6F313300033891 /* World Tour.mp3 */,
+				9C02EBAE2C6F30FB00033891 /* HS02_KW266_TA_from_V1.0.6B66_To_V1.0.6B67.zip */,
 				9C9C6F932C6B7DF5001F4B62 /* FD722AA7.gif */,
-				9C954BFB2C65BFE100B13BF6 /* 键盘打字.mp3 */,
-				9C954BF92C65BFE000B13BF6 /* 那女孩对我说.mp3 */,
 				9C954BFC2C65BFE100B13BF6 /* IMG_4585.png */,
 				9C954BFA2C65BFE100B13BF6 /* IMG_4611.png */,
 				9C4C78462C646CD100C0FD17 /* JW_HS01WF005.zip */,
@@ -183,6 +191,7 @@
 				9C4C78492C646CD100C0FD17 /* HWOnlineDialViewController.swift */,
 				9C954BF32C65B5C300B13BF6 /* HWAlbumViewController.swift */,
 				9C954BF52C65B5E700B13BF6 /* HWMusicViewController.swift */,
+				9C02EBAC2C6F302A00033891 /* HWOTAUpdateViewController.swift */,
 			);
 			path = Feature;
 			sourceTree = "<group>";
@@ -300,11 +309,13 @@
 				9C954C002C65BFE100B13BF6 /* IMG_4585.png in Resources */,
 				9C954BFE2C65BFE100B13BF6 /* IMG_4611.png in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
-				9C954BFD2C65BFE100B13BF6 /* 那女孩对我说.mp3 in Resources */,
+				9C02EBB32C6F313300033891 /* World Tour.mp3 in Resources */,
 				9C9C6F942C6B7DF5001F4B62 /* FD722AA7.gif in Resources */,
+				9C02EBB52C6F313300033891 /* Sufiyana.mp3 in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
-				9C954BFF2C65BFE100B13BF6 /* 键盘打字.mp3 in Resources */,
+				9C02EBAF2C6F30FB00033891 /* HS02_KW266_TA_from_V1.0.6B66_To_V1.0.6B67.zip in Resources */,
 				9C4C784A2C646CD200C0FD17 /* JW_HS01WF005.zip in Resources */,
+				9C02EBB42C6F313300033891 /* Ranganayaki.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,6 +415,7 @@
 				9C4C784D2C646CD200C0FD17 /* HWOnlineDialViewController.swift in Sources */,
 				9C4C784B2C646CD200C0FD17 /* HWFeatureViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				9C02EBAD2C6F302A00033891 /* HWOTAUpdateViewController.swift in Sources */,
 				9C954BF62C65B5E700B13BF6 /* HWMusicViewController.swift in Sources */,
 				9C954BF42C65B5C300B13BF6 /* HWAlbumViewController.swift in Sources */,
 				9C4C784C2C646CD200C0FD17 /* HWCustomDialViewController.swift in Sources */,

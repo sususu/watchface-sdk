@@ -9,7 +9,7 @@ import UIKit
 
 class HWFeatureViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    private let features = ["Custom Dial", "Online Dial", "Sync Album", "Sync Music"]
+    private let features = ["Custom Dial", "Online Dial", "Sync Album", "Sync Music", "OTA Update"]
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -67,6 +67,11 @@ class HWFeatureViewController: UIViewController, UICollectionViewDataSource, UIC
             let vc: HWMusicViewController = HWMusicViewController()
             self.navigationController?.pushViewController(vc, animated: true)
             break
+        case 4:
+            let vc: HWOTAUpdateViewController = HWOTAUpdateViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+            break
+            
         default:
             break
         }
