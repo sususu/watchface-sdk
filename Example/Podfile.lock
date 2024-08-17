@@ -1,4 +1,5 @@
 PODS:
+  - Masonry (1.1.0)
   - Reusable (4.1.2):
     - Reusable/Storyboard (= 4.1.2)
     - Reusable/View (= 4.1.2)
@@ -11,6 +12,7 @@ PODS:
   - SnapKit (5.6.0)
   - SSZipArchive (2.4.3)
   - WatchfaceSDK (1.0.2):
+    - Masonry
     - SSZipArchive
     - Zip (~> 2.1)
   - Zip (2.1.2)
@@ -24,6 +26,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Masonry
     - Reusable
     - RSColorPicker
     - SDWebImage
@@ -36,12 +39,13 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   Reusable: 6bae6a5e8aa793c9c441db0213c863a64bce9136
   RSColorPicker: 4d71e12f8e28d44c3885fbb3ba10bc3627bdb393
   SDWebImage: a79252b60f4678812d94316c91da69ec83089c9f
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
-  WatchfaceSDK: b2de2bc7c65f2b1ac050d36eaccad1472eeb99e0
+  WatchfaceSDK: 0f1cdcbc33740349501a065415c1d37de0ac1a74
   Zip: b3fef584b147b6e582b2256a9815c897d60ddc67
 
 PODFILE CHECKSUM: d3461d4b4714ede00b56a63b78f79cfe03f7f106

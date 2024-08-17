@@ -31,6 +31,7 @@
 		9C954BFE2C65BFE100B13BF6 /* IMG_4611.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C954BFA2C65BFE100B13BF6 /* IMG_4611.png */; };
 		9C954C002C65BFE100B13BF6 /* IMG_4585.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C954BFC2C65BFE100B13BF6 /* IMG_4585.png */; };
 		9C9C6F942C6B7DF5001F4B62 /* FD722AA7.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9C9C6F932C6B7DF5001F4B62 /* FD722AA7.gif */; };
+		9CC596552C703C7C00EE490E /* 3367.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = 9CC596542C703C7C00EE490E /* 3367.MP4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		9C954BFA2C65BFE100B13BF6 /* IMG_4611.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IMG_4611.png; sourceTree = "<group>"; };
 		9C954BFC2C65BFE100B13BF6 /* IMG_4585.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IMG_4585.png; sourceTree = "<group>"; };
 		9C9C6F932C6B7DF5001F4B62 /* FD722AA7.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = FD722AA7.gif; sourceTree = "<group>"; };
+		9CC596542C703C7C00EE490E /* 3367.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 3367.MP4; sourceTree = "<group>"; };
 		A90A132746CF712E89F0025E /* Pods-WatchfaceSDK_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchfaceSDK_Example.debug.xcconfig"; path = "Target Support Files/Pods-WatchfaceSDK_Example/Pods-WatchfaceSDK_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		B80AD01FF0BEAE4490B29E2A /* Pods_WatchfaceSDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatchfaceSDK_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5F09AB249954655101369E1 /* Pods-WatchfaceSDK_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchfaceSDK_Tests.debug.xcconfig"; path = "Target Support Files/Pods-WatchfaceSDK_Tests/Pods-WatchfaceSDK_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				9C02EBB22C6F313300033891 /* Sufiyana.mp3 */,
 				9C02EBB02C6F313300033891 /* World Tour.mp3 */,
 				9C02EBAE2C6F30FB00033891 /* HS02_KW266_TA_from_V1.0.6B66_To_V1.0.6B67.zip */,
+				9CC596542C703C7C00EE490E /* 3367.MP4 */,
 				9C9C6F932C6B7DF5001F4B62 /* FD722AA7.gif */,
 				9C954BFC2C65BFE100B13BF6 /* IMG_4585.png */,
 				9C954BFA2C65BFE100B13BF6 /* IMG_4611.png */,
@@ -307,6 +310,7 @@
 			files = (
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				9C954C002C65BFE100B13BF6 /* IMG_4585.png in Resources */,
+				9CC596552C703C7C00EE490E /* 3367.MP4 in Resources */,
 				9C954BFE2C65BFE100B13BF6 /* IMG_4611.png in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				9C02EBB32C6F313300033891 /* World Tour.mp3 in Resources */,
@@ -336,6 +340,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-WatchfaceSDK_Example/Pods-WatchfaceSDK_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/RSColorPicker/RSColorPicker.framework",
 				"${BUILT_PRODUCTS_DIR}/Reusable/Reusable.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -346,6 +351,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RSColorPicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reusable.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",

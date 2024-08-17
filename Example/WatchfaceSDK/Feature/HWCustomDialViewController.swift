@@ -11,6 +11,7 @@ import RSColorPicker
 import HwBluetoothSDK
 import WatchfaceSDK
 import SDWebImage
+import VideoWatchfaceSDK
 
 class HWCustomDialViewController: UIViewController, UINavigationControllerDelegate {
     
@@ -56,10 +57,10 @@ class HWCustomDialViewController: UIViewController, UINavigationControllerDelega
         return button
     }()
     
-    private let selectGifButton: UIButton = {
+    private let selectVideoButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Choose gif Dial Bg", for: .normal)
-        button.addTarget(self, action: #selector(selectGif), for: .touchUpInside)
+        button.setTitle("Choose Video Dial Bg", for: .normal)
+        button.addTarget(self, action: #selector(selectVideo), for: .touchUpInside)
         return button
     }()
     
@@ -90,7 +91,7 @@ class HWCustomDialViewController: UIViewController, UINavigationControllerDelega
         self.view.addSubview(timeColorButton)
         self.view.addSubview(dialBgColorButton)
         self.view.addSubview(selectAlbumButton)
-        self.view.addSubview(selectGifButton)
+        self.view.addSubview(selectVideoButton)
         dialBackground.addSubview(timeImageView)
         self.view.addSubview(syncDialButton)
              
@@ -125,7 +126,7 @@ class HWCustomDialViewController: UIViewController, UINavigationControllerDelega
             make.leading.equalTo(20)
         }
         
-        selectGifButton.snp.makeConstraints { make in
+        selectVideoButton.snp.makeConstraints { make in
             make.top.equalTo(dialBackground.snp.bottom).offset(60)
             make.trailing.equalTo(-20)
         }
@@ -172,11 +173,44 @@ class HWCustomDialViewController: UIViewController, UINavigationControllerDelega
         dialBackground.image = UIImage(named: "IMG_4627");
     }
     
-    @objc private func selectGif() {
-        if let gifFilePath = Bundle.main.path(forResource: "FD722AA7", ofType: "gif") {
-            gifURL = URL(fileURLWithPath: gifFilePath)
-            dialBackground.sd_setImage(with: gifURL, placeholderImage: nil)
+    @objc private func selectVideo() {
+        
+        if let zipFilePath = Bundle.main.path(forResource: "3367", ofType: "MP4") {
+            let videoURL = URL(fileURLWithPath: zipFilePath)
+            
+            let vc = VideoEditorBaseViewController()
+            // Maximum number of seconds that can be edited
+            vc.videoTime = 3
+            // Watch screen width (used for cropping video width)
+            vc.watchWidth = 480
+            // Watch screen height (used for cropping video height)
+            vc.watchHeight = 480
+            // Video path URL
+            vc.videoURL = videoURL
+            //1: Dark mode 2: Light mode 3: Get the system theme mode
+            vc.themeType = 1
+            
+            vc.backBlock = { [weak self] gifFilePath, isSuccess in
+                if isSuccess {
+                    print("Converted gif path: \(gifFilePath)")
+                    if FileManager.default.fileExists(atPath: gifFilePath) {
+                        self?.gifURL = URL(fileURLWithPath: gifFilePath)
+                        self?.dialBackground.sd_setImage(with: self?.gifURL, placeholderImage: nil)
+                    } else {
+                        print("File does not exist at path: \(gifFilePath)")
+                    }
+                    
+                } else {
+                    print("Failed to convert video to gif")
+                }
+            }
+            
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true)
+        } else {
+            print("File not found. Make sure that the file has been added to the project Bundle and that the file name and type are correct.")
         }
+
     }
     
     @objc private func syncDial() {
