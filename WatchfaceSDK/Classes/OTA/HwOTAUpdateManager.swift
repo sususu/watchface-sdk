@@ -147,7 +147,12 @@ public class HwOTAUpdateManager: NSObject, SFOTAManagerDelegate {
     
     public func otaManager(manager: SFOTAManager, stage: SFOTAProgressStage, totalBytes: Int, completedBytes: Int) {
         DispatchQueue.main.async {
-            self.progress = Int(Float(completedBytes) / Float(totalBytes) * 100)
+            if stage == .nand_res {
+                self.progress = Int(Float(completedBytes) / Float(totalBytes) * 100 * 0.5)
+            } else if stage == .nand_image {
+                self.progress = 50 + Int(Float(completedBytes) / Float(totalBytes) * 100 * 0.5)
+            }
+        
             self.firmwareUpdateBlock?(.progress, self.progress, 0, "")
         }
     }
