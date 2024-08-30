@@ -19,4 +19,15 @@ public class Step: IconData {
         setIcon("icon_steps.png")
         setValueType(QjsValueType.stepsNum.rawValue)
     }
+    
+    public override func setIconAlign(_ align: Alignment) {
+        super.setIconAlign(align)
+        if align == .Left || align == .Right {
+            width = 20 * 5 + 40
+            height = 26
+        } else {
+            width = 20 * 5
+            height = 26 + 40
+        }
+    }
 }

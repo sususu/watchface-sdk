@@ -19,4 +19,15 @@ public class Heartrate: IconData {
         setIcon("icon_heart.png")
         setValueType(QjsValueType.heartrateNum.rawValue)
     }
+    
+    public override func setIconAlign(_ align: Alignment) {
+        super.setIconAlign(align)
+        if align == .Left || align == .Right {
+            width = 20 * 3 + 40
+            height = 26
+        } else {
+            width = 20 * 3
+            height = 26 + 40
+        }
+    }
 }

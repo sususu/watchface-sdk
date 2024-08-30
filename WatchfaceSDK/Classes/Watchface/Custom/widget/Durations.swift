@@ -19,4 +19,15 @@ public class Durations: IconData {
         setIcon("icon_time.png")
         setValueType(QjsValueType.activityTime.rawValue)
     }
+    
+    public override func setIconAlign(_ align: Alignment) {
+        super.setIconAlign(align)
+        if align == .Left || align == .Right {
+            width = 20 * 3 + 40
+            height = 26
+        } else {
+            width = 20 * 3
+            height = 26 + 40
+        }
+    }
 }

@@ -19,4 +19,15 @@ public class Calorie: IconData {
         setIcon("icon_kcal.png")
         setValueType(QjsValueType.calorieNum.rawValue)
     }
+    
+    public override func setIconAlign(_ align: Alignment) {
+        super.setIconAlign(align)
+        if align == .Left || align == .Right {
+            width = 20 * 4 + 40
+            height = 26
+        } else {
+            width = 20 * 4
+            height = 26 + 40
+        }
+    }
 }

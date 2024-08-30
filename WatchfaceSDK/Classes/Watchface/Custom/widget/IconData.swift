@@ -1,9 +1,17 @@
 import UIKit
 
+public enum Alignment {
+    case Top
+    case Right
+    case Bottom
+    case Left
+}
+
 public class IconData: AWidget {
     var icon: String?
     var images: [Int: String] = [:]
     var iconOffset: Int = 0
+    var iconAlign: Alignment = .Top
 
     public override init() {
         super.init()
@@ -51,8 +59,6 @@ public class IconData: AWidget {
             return []
         }
         
-        
-        
         guard let iconImg = UIImage.loadImage(named: icon!) else {
             return []
         }
@@ -63,31 +69,94 @@ public class IconData: AWidget {
         }
         
         iconOffset = Int((Int(iconBitmap.size.height) - dataImgHeight) / 2)
+        
 
         var widgetList: [Widget] = []
 
         let imageWidget = SingleImageWidget()
         imageWidget.setImage(iconBitmap!)
-        imageWidget.setLocation(Point(x: getLocation().x, y: getLocation().y - iconOffset))
-        if let iconBitmap = iconBitmap {
-            imageWidget.setSize(Size(width: Int(iconBitmap.size.width), height: Int(iconBitmap.size.height)))
-        }
-        widgetList.append(imageWidget)
-
-        let newX = getLocation().x + imageWidget.getSize().width
-        let newY = getLocation().y
-        var newWidth = getSize().width - imageWidget.getSize().width
-        if newWidth < 0 { newWidth = 0 }
-        let newHeight = getSize().height
 
         let dataGroupWidget = GroupWidget()
         dataGroupWidget.setValueType(getValueType())
-        dataGroupWidget.setLocation(Point(x: newX, y: newY))
-        dataGroupWidget.setSize(Size(width: newWidth, height: newHeight))
         dataGroupWidget.setAlignment(.center)
         dataGroupWidget.setImages(bitmapMap)
+        
+        switch iconAlign {
+            case .Left: do {
+                imageWidget.setLocation(Point(x: getLocation().x, y: getLocation().y - iconOffset))
+                if let iconBitmap = iconBitmap {
+                    imageWidget.setSize(Size(width: Int(iconBitmap.size.width), height: Int(iconBitmap.size.height)))
+                }
+                let newX = getLocation().x + imageWidget.getSize().width
+                let newY = getLocation().y
+                var newWidth = getSize().width - imageWidget.getSize().width
+                if newWidth < 0 { newWidth = 0 }
+                let newHeight = getSize().height
+                
+                dataGroupWidget.setLocation(Point(x: newX, y: newY))
+                dataGroupWidget.setSize(Size(width: newWidth, height: newHeight))
+                
+                break
+            }
+            case .Right: do {
+                if let iconBitmap = iconBitmap {
+                    imageWidget.setSize(Size(width: Int(iconBitmap.size.width), height: Int(iconBitmap.size.height)))
+                }
+                imageWidget.setLocation(Point(x: getLocation().x + getSize().width - imageWidget.getSize().width, y: getLocation().y - iconOffset))
+                
+                var newWidth = getSize().width - imageWidget.getSize().width
+                if newWidth < 0 { newWidth = 0 }
+                let newHeight = getSize().height
+                
+                dataGroupWidget.setLocation(getLocation())
+                dataGroupWidget.setSize(Size(width: newWidth, height: newHeight))
+                
+                break
+            }
+            case .Bottom: do {
+                dataGroupWidget.setLocation(getLocation())
+                var newHeight = 0
+                if let iconBitmap = iconBitmap {
+                    imageWidget.setSize(Size(width: Int(iconBitmap.size.width), height: Int(iconBitmap.size.height)))
+                    newHeight = getSize().height - imageWidget.getSize().height
+                } else {
+                    newHeight = getSize().height
+                }
+                let newWidth = getSize().width
+                dataGroupWidget.setSize(Size(width: newWidth, height: newHeight))
+                
+                let newX = getLocation().x + (getSize().width - imageWidget.getSize().width) / 2
+                let newY = getLocation().y + getSize().height - imageWidget.getSize().height
+                imageWidget.setLocation(Point(x: newX, y: newY))
+            }
+            case .Top: do {
+                
+                var newHeight = 0
+                var newY = getLocation().y
+                if let iconBitmap = iconBitmap {
+                    imageWidget.setSize(Size(width: Int(iconBitmap.size.width), height: Int(iconBitmap.size.height)))
+                    newHeight = getSize().height - imageWidget.getSize().height
+                    newY += imageWidget.getSize().height
+                } else {
+                    newHeight = getSize().height
+                }
+                
+                let newX = getLocation().x + (getSize().width - imageWidget.getSize().width) / 2
+                
+                imageWidget.setLocation(Point(x: newX, y: getLocation().y))
+                    
+                var newWidth = getSize().width
+                if newWidth < 0 {
+                    newWidth = 0
+                }
+                dataGroupWidget.setLocation(Point(x: getLocation().x, y: newY))
+                dataGroupWidget.setSize(Size(width: newWidth, height: newHeight))
+                
+                break
+            }
+        }
+        widgetList.append(imageWidget)
         widgetList.append(dataGroupWidget)
-
         return widgetList
     }
 
@@ -101,5 +170,9 @@ public class IconData: AWidget {
 
     func getImages() -> [Int: String] {
         return images
+    }
+                                        
+    public func setIconAlign(_ align: Alignment) {
+        self.iconAlign = align
     }
 }

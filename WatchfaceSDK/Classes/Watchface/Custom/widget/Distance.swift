@@ -19,4 +19,15 @@ public class Distance: IconData {
         setIcon("icon_distance.png")
         setValueType(QjsValueType.distanceNum.rawValue)
     }
+    
+    public override func setIconAlign(_ align: Alignment) {
+        super.setIconAlign(align)
+        if align == .Left || align == .Right {
+            width = 20 * 3 + 40
+            height = 26
+        } else {
+            width = 20 * 3
+            height = 26 + 40
+        }
+    }
 }
