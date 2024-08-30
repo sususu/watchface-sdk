@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'WatchfaceSDK'
-  s.version          = '1.0.3'
+  s.version          = '1.0.4'
   s.summary          = 'A short description of WatchfaceSDK.'
 
   s.description      = <<-DESC
