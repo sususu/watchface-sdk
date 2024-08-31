@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'WatchfaceSDK'
-  s.version          = '1.0.4'
+  s.version          = '1.0.5'
   s.summary          = 'A short description of WatchfaceSDK.'
 
   s.description      = <<-DESC
@@ -19,7 +19,7 @@ TODO: Add long description of the pod here.
 
   s.vendored_frameworks = 'WatchfaceSDK/SFDialPlateSDK.framework', 'WatchfaceSDK/eZIPSDK.framework', 'WatchfaceSDK/SifliOTAManagerSDK.framework','WatchfaceSDK/VideoWatchfaceSDK.framework'
   
-  s.frameworks = 'AudioToolbox', 'CoreMedia', 'VideoToolbox'
+  s.frameworks = 'AudioToolbox', 'CoreMedia', 'VideoToolbox', 'AVFoundation'
   s.libraries = 'z', 'bz2', 'iconv'
 
   s.dependency 'Zip', '~> 2.1'

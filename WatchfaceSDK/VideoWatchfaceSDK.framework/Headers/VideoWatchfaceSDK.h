@@ -15,4 +15,4 @@ FOUNDATION_EXPORT const unsigned char VideoWatchfaceSDKVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <VideoWatchfaceSDK/PublicHeader.h>
 
-#import <VideoWatchfaceSDK/VideoEditorBaseViewController.h>
+#import <VideoWatchfaceSDK/HwVideoEditorManager.h>
