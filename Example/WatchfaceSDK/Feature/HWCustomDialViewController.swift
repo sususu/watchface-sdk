@@ -20,6 +20,24 @@ class HWCustomDialViewController: UIViewController, UINavigationControllerDelega
         timeImageView.image = UIImage(named: "icon_watchface_edit_time_style1")
         return timeImageView
     }()
+    
+    private let calorieImageView: UIImageView = {
+        let calorieImageView = UIImageView()
+        calorieImageView.image = UIImage(named: "icon_watchface_edit_calorie_style4")
+        return calorieImageView
+    }()
+    
+    private let hrImageView: UIImageView = {
+        let hrImageView = UIImageView()
+        hrImageView.image = UIImage(named: "icon_watchface_edit_hr_style4")
+        return hrImageView
+    }()
+    
+    private let stepImageView: UIImageView = {
+        let stepImageView = UIImageView()
+        stepImageView.image = UIImage(named: "icon_watchface_edit_step_style4")
+        return stepImageView
+    }()
         
     private let dialBackground: UIImageView = {
         let view = UIImageView()
@@ -85,7 +103,7 @@ class HWCustomDialViewController: UIViewController, UINavigationControllerDelega
         super.viewDidLoad()
         self.title = "CustomDial"
         self.view.backgroundColor = .white
- 
+         
         self.view.addSubview(dialBackground)
         self.view.addSubview(switchButton)
         self.view.addSubview(timeColorButton)
@@ -93,6 +111,9 @@ class HWCustomDialViewController: UIViewController, UINavigationControllerDelega
         self.view.addSubview(selectAlbumButton)
         self.view.addSubview(selectVideoButton)
         dialBackground.addSubview(timeImageView)
+        dialBackground.addSubview(calorieImageView)
+        dialBackground.addSubview(hrImageView)
+        dialBackground.addSubview(stepImageView)
         self.view.addSubview(syncDialButton)
              
         dialBackground.snp.makeConstraints { make in
@@ -104,6 +125,21 @@ class HWCustomDialViewController: UIViewController, UINavigationControllerDelega
         timeImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(dialBackground.snp.top).offset(30)
+        }
+        
+        calorieImageView.snp.makeConstraints { make in
+            make.leading.equalTo(dialBackground.snp.leading).offset(50)
+            make.top.equalTo(dialBackground.snp.top).offset(170)
+        }
+        
+        hrImageView.snp.makeConstraints { make in
+            make.trailing.equalTo(dialBackground.snp.trailing).offset(-50)
+            make.top.equalTo(dialBackground.snp.top).offset(170)
+        }
+        
+        stepImageView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(dialBackground.snp.top).offset(220)
         }
         
         switchButton.snp.makeConstraints { make in
@@ -177,40 +213,19 @@ class HWCustomDialViewController: UIViewController, UINavigationControllerDelega
         
         if let zipFilePath = Bundle.main.path(forResource: "3367", ofType: "MP4") {
             let videoURL = URL(fileURLWithPath: zipFilePath)
-            
-            let vc = VideoEditorBaseViewController()
-            // Maximum number of seconds that can be edited
-            vc.videoTime = 3
-            // Watch screen width (used for cropping video width)
-            vc.watchWidth = 480
-            // Watch screen height (used for cropping video height)
-            vc.watchHeight = 480
-            // Video path URL
-            vc.videoURL = videoURL
-            //1: Dark mode 2: Light mode 3: Get the system theme mode
-            vc.themeType = 1
-            
-            vc.backBlock = { [weak self] gifFilePath, isSuccess in
-                if isSuccess {
-                    print("Converted gif path: \(gifFilePath)")
-                    if FileManager.default.fileExists(atPath: gifFilePath) {
-                        self?.gifURL = URL(fileURLWithPath: gifFilePath)
-                        self?.dialBackground.sd_setImage(with: self?.gifURL, placeholderImage: nil)
-                    } else {
-                        print("File does not exist at path: \(gifFilePath)")
-                    }
                     
-                } else {
-                    print("Failed to convert video to gif")
-                }
-            }
-            
-            vc.modalPresentationStyle = .fullScreen
-            present(vc, animated: true)
+            let videoEditorManager = HwVideoEditorManager.sharedInstance()
+            // Watch screen width (used for cropping video width)
+            videoEditorManager.watchWidth = 480
+            // Watch screen height (used for cropping video height)
+            videoEditorManager.watchHeight = 480
+            self.gifURL = videoEditorManager.convertVideo(toGif: videoURL, startTime: 0, endTime: 3)
+            self.dialBackground.sd_setImage(with: self.gifURL, placeholderImage: nil)
+            print("gifFilePath = \(String(describing: self.gifURL?.absoluteString))")
+                   
         } else {
             print("File not found. Make sure that the file has been added to the project Bundle and that the file name and type are correct.")
         }
-
     }
     
     @objc private func syncDial() {
@@ -255,6 +270,42 @@ class HWCustomDialViewController: UIViewController, UINavigationControllerDelega
         week.id = 3
         watchface.widgetList.append(week)
         
+        let calorie = Calorie(tintColor: color)
+        calorie.x = 40
+        calorie.y = 300
+        calorie.valueType = QjsValueType.calorieNum.rawValue
+        calorie.setIconAlign(.Top)
+        calorie.name = "calorie"
+        calorie.id = 4
+        watchface.widgetList.append(calorie)
+        
+        let hr = Heartrate(tintColor: color)
+        hr.x = 340
+        hr.y = 300
+        hr.valueType = QjsValueType.heartrateNum.rawValue
+        hr.setIconAlign(.Top)
+        hr.name = "hr"
+        hr.id = 5
+        watchface.widgetList.append(hr)
+        
+//        let step = Step(tintColor: color)
+//        step.x = 200
+//        step.y = 380
+//        step.valueType = QjsValueType.stepsNum.rawValue
+//        step.setIconAlign(.Top)
+//        step.name = "step"
+//        step.id = 6
+//        watchface.widgetList.append(step)
+        
+        let weather = WeatherTA(tintColor: UIColor.white)
+        weather.x = 200
+        weather.y = 380
+        weather.valueType = QjsValueType.weatherNum.rawValue
+        weather.setIconAlign(.Top)
+        weather.name = "weather"
+        weather.id = 6
+        watchface.widgetList.append(weather)
+
         
         if let device:HwBluetoothDevice = HwBluetoothCenter.sharedInstance().connectedDevice {
             WatchfaceSDK.getInstance().setCustomWatchface(devIdentifier: device.peripheral.identifier.uuidString, watchface: watchface) { iscompressSuccess in
@@ -343,6 +394,16 @@ extension HWCustomDialViewController: RSColorPickerViewDelegate, UIImagePickerCo
         if self.isTime {
             timeImageView.tintColor = selectedColor
             timeImageView.image = timeImageView.image?.withRenderingMode(.alwaysTemplate)
+            
+            calorieImageView.tintColor = selectedColor
+            calorieImageView.image = calorieImageView.image?.withRenderingMode(.alwaysTemplate)
+            
+            hrImageView.tintColor = selectedColor
+            hrImageView.image = hrImageView.image?.withRenderingMode(.alwaysTemplate)
+            
+            stepImageView.tintColor = selectedColor
+            stepImageView.image = stepImageView.image?.withRenderingMode(.alwaysTemplate)
+            
         } else {
             dialBackground.image = UIImage.imageWithColor(color: selectedColor!, size: CGSize(width: width, height: height))
         }

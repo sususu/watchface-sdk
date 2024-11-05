@@ -7,8 +7,8 @@
 
 import Foundation
 public struct Size {
-    var width: Int
-    var height: Int
+    public var width: Int
+    public var height: Int
     
-    static let zero = Size(width: 0, height: 0)
+    public static let zero = Size(width: 0, height: 0)
 }
