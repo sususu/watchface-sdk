@@ -104,7 +104,7 @@ import UIKit
         return result        
     }
     
-    @objc public func makeZip(callback: @escaping (URL?, Error?) -> Void) {
+    public func makeZip(callback: @escaping (URL?, Error?) -> Void) {
         DispatchQueue.global().async { [weak self] in
             DispatchQueue.main.async {
                 if let error = self?.packageZip() {
@@ -182,7 +182,7 @@ import UIKit
     }
     
     
-    @objc public func copy() -> Watchface {
+    public func copy() -> Watchface {
         let w = Watchface(name: self.name)
         w.width = width
         w.height = height
@@ -195,7 +195,7 @@ import UIKit
         return w
     }
     
-    @objc func exportBinFiles(watchface: Watchface, isAOD: Bool) -> Error? {
+    func exportBinFiles(watchface: Watchface, isAOD: Bool) -> Error? {
         var bitmaps: [String: UIImage] = [:]
         var gifs: [String: URL] = [:]
         
