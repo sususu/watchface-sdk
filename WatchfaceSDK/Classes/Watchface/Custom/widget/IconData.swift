@@ -1,6 +1,6 @@
 import UIKit
 
-@objc public enum Alignment {
+@objc public enum Alignment: Int {
     case Top
     case Right
     case Bottom
