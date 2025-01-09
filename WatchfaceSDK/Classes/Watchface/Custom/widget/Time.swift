@@ -1,7 +1,7 @@
 
 import UIKit
 
-public class Time: AWidget {
+@objc public class Time: AWidget {
     private var images: [Int: String] = [:]
     private var colonImageName: String = "time_b_25.png"
     private var hourNumbersSize: Size

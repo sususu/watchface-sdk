@@ -1,7 +1,7 @@
 
 import UIKit
 
-public class Week: AWidget {
+@objc public class Week: AWidget {
     private var images: [String: String] = [:]
 
     public override init() {

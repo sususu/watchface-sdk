@@ -1,7 +1,7 @@
 
 import UIKit
 
-public class Step: IconData {
+@objc public class Step: IconData {
     public override init() {
         super.init()
         initStep()

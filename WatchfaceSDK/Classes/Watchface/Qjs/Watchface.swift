@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Watchface: NSObject {
+@objc public class Watchface: NSObject {
     var id: Int64 = 0
     var width: Int = 466
     var height: Int = 466
@@ -27,7 +27,7 @@ class Watchface: NSObject {
         self.name = name
     }
     
-    public func toQjs(_ isAOD: Bool = false) -> String {
+    @objc public func toQjs(_ isAOD: Bool = false) -> String {
         
         let startFunc = Function(name: "start")
         let pauseFunc = Function(name: "pause")
@@ -104,7 +104,7 @@ class Watchface: NSObject {
         return result        
     }
     
-    public func makeZip(callback: @escaping (URL?, Error?) -> Void) {
+    @objc public func makeZip(callback: @escaping (URL?, Error?) -> Void) {
         DispatchQueue.global().async { [weak self] in
             DispatchQueue.main.async {
                 if let error = self?.packageZip() {
@@ -182,7 +182,7 @@ class Watchface: NSObject {
     }
     
     
-    public func copy() -> Watchface {
+    @objc public func copy() -> Watchface {
         let w = Watchface(name: self.name)
         w.width = width
         w.height = height
@@ -195,7 +195,7 @@ class Watchface: NSObject {
         return w
     }
     
-    func exportBinFiles(watchface: Watchface, isAOD: Bool) -> Error? {
+    @objc func exportBinFiles(watchface: Watchface, isAOD: Bool) -> Error? {
         var bitmaps: [String: UIImage] = [:]
         var gifs: [String: URL] = [:]
         

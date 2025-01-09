@@ -1,7 +1,7 @@
 
 import UIKit
 
-public class Calorie: IconData {
+@objc public class Calorie: IconData {
     public override init() {
         super.init()
         initCalorie()

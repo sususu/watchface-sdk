@@ -1,7 +1,7 @@
 
 import UIKit
 
-public class Distance: IconData {
+@objc public class Distance: IconData {
     public override init() {
         super.init()
         initDistance()

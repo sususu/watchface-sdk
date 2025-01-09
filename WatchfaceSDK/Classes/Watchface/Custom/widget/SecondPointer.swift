@@ -1,7 +1,7 @@
 
 import UIKit
 
-public class SecondPointer: PointerWidgets {
+@objc public class SecondPointer: PointerWidgets {
     private var imageName: String = "pointer_second.png"
 
     public override init(watchfaceSize: Size) {

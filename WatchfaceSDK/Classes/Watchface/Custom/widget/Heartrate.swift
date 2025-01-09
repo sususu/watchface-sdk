@@ -1,7 +1,7 @@
 
 import UIKit
 
-public class Heartrate: IconData {
+@objc public class Heartrate: IconData {
     public override init() {
         super.init()
         initHeartrate()

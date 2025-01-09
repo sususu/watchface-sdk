@@ -1,7 +1,7 @@
 
 import UIKit
 
-public class Weather: IconData {
+@objc public class Weather: IconData {
     public override init() {
         super.init()
         initWeather()

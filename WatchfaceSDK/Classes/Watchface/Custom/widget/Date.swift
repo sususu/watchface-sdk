@@ -1,7 +1,7 @@
 
 import UIKit
 
-public class Date: AWidget {
+@objc public class Date: AWidget {
     var images: [Int: String] = [:]
 
     public override init() {

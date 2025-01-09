@@ -1,7 +1,7 @@
 
 import UIKit
 
-public class Battery: IconData {
+@objc public class Battery: IconData {
     public override init() {
         super.init()
         initBattery()

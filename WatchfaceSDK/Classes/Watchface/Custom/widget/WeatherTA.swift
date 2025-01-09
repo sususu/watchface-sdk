@@ -1,7 +1,7 @@
 
 import UIKit
 
-public class WeatherTA: IconData {
+@objc public class WeatherTA: IconData {
     
     private var weatherImages: [String] = []
     

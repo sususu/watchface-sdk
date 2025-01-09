@@ -1,7 +1,7 @@
 
 import UIKit
 
-public class Durations: IconData {
+@objc public class Durations: IconData {
     public override init() {
         super.init()
         initDuration()
