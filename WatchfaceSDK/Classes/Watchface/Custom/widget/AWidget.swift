@@ -5,8 +5,8 @@ import UIKit
     @objc public var id: Int
     @objc public var width: Int
     @objc public var height: Int
-    public var x: Int
-    public var y: Int
+    @objc public var x: Int
+    @objc public var y: Int
     @objc public var tintColor: UIColor?
     @objc public var valueType: Int
     @objc public var name: String
