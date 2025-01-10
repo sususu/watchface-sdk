@@ -9,7 +9,7 @@ import UIKit
         initDate()
     }
 
-    public init(tintColor: UIColor) {
+    @objc public init(tintColor: UIColor) {
         super.init()
         self.tintColor = tintColor
         initDate()

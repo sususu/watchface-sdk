@@ -7,7 +7,7 @@ import UIKit
         initWeather()
     }
 
-    public override init(tintColor: UIColor) {
+    @objc public override init(tintColor: UIColor) {
         super.init(tintColor: tintColor)
         initWeather()
     }

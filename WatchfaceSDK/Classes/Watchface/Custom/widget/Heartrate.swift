@@ -7,7 +7,7 @@ import UIKit
         initHeartrate()
     }
 
-    public override init(tintColor: UIColor) {
+    @objc public override init(tintColor: UIColor) {
         super.init(tintColor: tintColor)
         setName("Heartrate")
         initHeartrate()

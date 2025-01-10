@@ -7,7 +7,7 @@ import UIKit
         initDistance()
     }
 
-    public override init(tintColor: UIColor) {
+    @objc public override init(tintColor: UIColor) {
         super.init(tintColor: tintColor)
         initDistance()
     }

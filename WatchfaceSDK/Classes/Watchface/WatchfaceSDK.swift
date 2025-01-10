@@ -188,7 +188,7 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
         self.pushManager.pushDialPlate(devIdentifier: devIdentifier, type: 5, zipPath: filePath,withByteAlign: false)
     }
     
-    public func syncZipFileWithDevIdentifier(devIdentifier: String, filePath: URL, type: Int, progressCallback: @escaping QjsWatchfaceProgressCallback, finishCallback: @escaping QjsWatchfaceFinishCallback) {
+    @objc public func syncZipFile(devIdentifier: String, filePath: URL, type: Int, progressCallback: @escaping QjsWatchfaceProgressCallback, finishCallback: @escaping QjsWatchfaceFinishCallback) {
         self.pushManager.delegate = self
         
         assert(hadInit, "Please call WatchfaceSDK.getInstance().initSDK(application: UIApplication) before using any API")

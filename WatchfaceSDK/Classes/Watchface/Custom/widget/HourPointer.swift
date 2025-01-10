@@ -9,7 +9,7 @@ import UIKit
         initHourPointer()
     }
 
-    public init(_ watchfaceSize: Size, tintColor: UIColor) {
+    @objc public init(_ watchfaceSize: Size, tintColor: UIColor) {
         super.init(watchfaceSize: watchfaceSize)
         self.tintColor = tintColor
         initHourPointer()

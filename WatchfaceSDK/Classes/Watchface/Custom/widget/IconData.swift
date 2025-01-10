@@ -17,7 +17,7 @@ public class IconData: AWidget {
         super.init()
     }
     
-    public init(tintColor: UIColor) {
+    @objc public init(tintColor: UIColor) {
         super.init()
         // 20 x 26
         images[0x2d] = "data_num_2d.png"

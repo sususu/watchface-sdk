@@ -2,16 +2,16 @@
 import UIKit
 
 @objc public class AWidget: NSObject {
-    public var id: Int
-    public var width: Int
-    public var height: Int
+    @objc public var id: Int
+    @objc public var width: Int
+    @objc public var height: Int
     public var x: Int
     public var y: Int
-    public var tintColor: UIColor?
-    public var valueType: Int
-    public var name: String
+    @objc public var tintColor: UIColor?
+    @objc public var valueType: Int
+    @objc public var name: String
     
-    public override init() {
+    @objc public override init() {
         self.id = 0
         self.width = 0
         self.height = 0

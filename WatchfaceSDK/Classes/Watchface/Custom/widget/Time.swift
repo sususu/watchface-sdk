@@ -16,7 +16,7 @@ import UIKit
         initTime()
     }
 
-    public init(tintColor: UIColor) {
+    @objc public init(tintColor: UIColor) {
         self.hourNumbersSize = Size(width: 124, height: 96)
         self.minuteNumberSize = Size(width: 124, height: 96)
         self.colonSize = Size(width: 40, height: 96)

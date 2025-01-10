@@ -105,7 +105,7 @@ import eZIPSDK
         }
     }
     
-    @objc static func exportBinWithSource(source: UIImage, color: UIColor?) -> Data? {
+    @objc public static func exportBin(source: UIImage, color: UIColor?) -> Data? {
         guard let sourceBytes = bitmapToByteArray(bitmap: source) else { return nil }
         print("exportBin: start, file size: \(sourceBytes.count)")
         let binType: UInt8 = 1
