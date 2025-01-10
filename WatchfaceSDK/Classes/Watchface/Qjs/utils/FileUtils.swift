@@ -4,7 +4,7 @@ import ImageIO
 import Zip
 import eZIPSDK
 
-class FileUtils {
+@objc public class FileUtils : NSObject {
     static let TAG = "FileUtils"
 
     /**
@@ -103,6 +103,19 @@ class FileUtils {
                 }
             }
         }
+    }
+    
+    @objc static func exportBinWithSource(source: UIImage, color: UIColor?) -> Data? {
+        guard let sourceBytes = bitmapToByteArray(bitmap: source) else { return nil }
+        print("exportBin: start, file size: \(sourceBytes.count)")
+        let binType: UInt8 = 1
+        guard let pngData = source.pngData() else {
+            return nil
+        }
+        guard let data = ImageConvertor.eBin(fromPNGData: pngData, eColor: "rgb565", eType: 0, binType: binType, boardType: SFBoardType.type56X) else {
+            return nil
+        }
+        return data
     }
 
     static func exportBin(source: UIImage, color: UIColor?, isAOD: Bool, isTimeHand: Bool, fileName: String, watchfaceName: String) -> Bool {
@@ -295,11 +308,11 @@ class FileUtils {
     }
 
 //    static func packageQjs(_ watchfaceName: String) -> URL? {
-//            
+//
 //        let zipFilePath = qjsOutputPath(watchfaceName: watchfaceName)
 //        let folderURL = qjsToZipFolder(watchfaceName: watchfaceName)
 //        let targetFilePath = folderURL.appendingPathComponent("dynamic_app/qjs_wf/JW_diy/JW_diy_gif0.agif")
-//        
+//
 //        if let gifFilePath = Bundle.main.path(forResource: "JW_diy_gif0", ofType: "agif") {
 //            do {
 //                // Replace the file
@@ -310,7 +323,7 @@ class FileUtils {
 //                return nil
 //            }
 //        }
-//        
+//
 //        do {
 //            try Zip.zipFiles(paths: [folderURL], zipFilePath: zipFilePath, password: nil, progress: { progress in
 //                print("压缩进度：\(progress)")
@@ -322,7 +335,7 @@ class FileUtils {
 //            print("Error zipping files: \(error.localizedDescription)")
 //            return nil
 //        }
-//        
+//
 //        return zipFilePath
 //    }
 
