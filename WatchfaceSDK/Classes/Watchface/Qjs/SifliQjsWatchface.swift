@@ -1,5 +1,5 @@
 //
-//  QjsWatchface.swift
+//  SifliQjsWatchface.swift
 //  WatchfaceSDK
 //
 //  Created by HuaWo on 2024/8/2.
@@ -7,14 +7,14 @@
 
 import UIKit
 
-public class QjsWatchface: NSObject {
+public class SifliQjsWatchface: NSObject {
     var id: Int64 = 0
     var width: Int = 466
     var height: Int = 466
     var widgetList: [Widget] = []
     var name: String
     var thumbnail: UIImage?
-    var aod: QjsWatchface?
+    var aod: SifliQjsWatchface?
     var isAOD: Bool = false
     
     init(name: String) {
@@ -177,8 +177,8 @@ public class QjsWatchface: NSObject {
     }
     
     
-    public func copy() -> QjsWatchface {
-        let w = QjsWatchface(name: self.name)
+    public func copy() -> SifliQjsWatchface {
+        let w = SifliQjsWatchface(name: self.name)
         w.width = width
         w.height = height
         w.thumbnail = thumbnail
@@ -190,7 +190,7 @@ public class QjsWatchface: NSObject {
         return w
     }
     
-    func exportBinFiles(watchface: QjsWatchface, isAOD: Bool) -> Error? {
+    func exportBinFiles(watchface: SifliQjsWatchface, isAOD: Bool) -> Error? {
         var bitmaps: [String: UIImage] = [:]
         var gifs: [String: URL] = [:]
         

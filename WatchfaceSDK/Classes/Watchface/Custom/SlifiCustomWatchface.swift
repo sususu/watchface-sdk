@@ -43,7 +43,7 @@ public typealias WatchfaceCallback = (URL?, Error?) ->()
     }
 
     public func makeZip(callback: @escaping WatchfaceCallback) {
-        let watchface = QjsWatchface(name: "Ta")
+        let watchface = SifliQjsWatchface(name: "Ta")
         watchface.name = getName()
         watchface.width = getWidth()
         watchface.height = getHeight()
@@ -54,7 +54,7 @@ public typealias WatchfaceCallback = (URL?, Error?) ->()
         }
         watchface.widgetList = qjsWidgets
 
-        let aod: QjsWatchface = watchface
+        let aod: SifliQjsWatchface = watchface
         aod.isAOD = true
 
         if let backgroundGif = backgroundGif {
