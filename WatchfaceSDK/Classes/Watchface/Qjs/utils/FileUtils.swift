@@ -346,6 +346,8 @@ import eZIPSDK
         let folderURL = qjsToZipFolder(watchfaceName: watchfaceName)
 
         do {
+            // 删除旧的
+            try? FileManager.default.removeItem(at: zipFilePath)
             try Zip.zipFiles(paths: [folderURL], zipFilePath: zipFilePath, password: nil, progress: { progress in
                 print("压缩进度：\(progress)")
                 if progress >= 1.0 {

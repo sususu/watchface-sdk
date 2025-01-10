@@ -128,11 +128,6 @@ import UIKit
             return Error.createDirError
         }
         
-//        let bgSuccess = FileUtils.exportBin(source: background!, isAOD: false, isTimeHand: false, fileName: "bg.bin", watchfaceName: self.name)
-//        if !bgSuccess {
-//            return Error.exportBinError
-//        }
-        
         let success = FileUtils.exportBin(source: thumbnail!, isAOD: false, isTimeHand: false, fileName: "thumb.bin", watchfaceName: self.name)
         if !success {
             return Error.exportBinError

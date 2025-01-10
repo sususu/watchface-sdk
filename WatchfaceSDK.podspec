@@ -12,7 +12,7 @@ TODO: Add long description of the pod here.
   s.author           = { 'HWdan' => 'huangwentai@huawo-wear.com' }
   s.source           = { :git => 'https://gitee.com/huangwt1573/watchface-sdk.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '9.0'
   s.swift_version    = '4.2'
   s.source_files = 'WatchfaceSDK/Classes/Watchface/**/*','WatchfaceSDK/Classes/OTA/**/*'
   s.resources = ['WatchfaceSDK/Assets/*']
