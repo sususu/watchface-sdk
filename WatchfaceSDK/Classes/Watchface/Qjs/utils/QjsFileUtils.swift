@@ -47,6 +47,10 @@ import eZIPSDK
         }
         return dir.appendingPathComponent("qjs_temp/output/JW_\(watchfaceName).zip")
     }
+    
+    static func dynPath() -> String {
+        return "qjs_temp/dyn/dynamic_app";
+    }
 
     static func jwPath(watchfaceName: String) -> String {
         return "qjs_temp/dyn/dynamic_app/qjs_wf/JW_\(watchfaceName)"
@@ -68,6 +72,12 @@ import eZIPSDK
         return cacheDir.appendingPathComponent(aodTmpDir)
     }
 
+    static func cleanUpHistory() {
+        guard let cacheDir = getCacheDir() else { return }
+        let dynDir = cacheDir.appendingPathComponent(dynPath())
+        clearDirectory(dir: dynDir)
+    }
+    
     static func createQjsTmpDir(watchfaceName: String) -> Bool {
         guard let cacheDir = getCacheDir() else { return false }
         let jwTmpDir = cacheDir.appendingPathComponent(jwPath(watchfaceName: watchfaceName))
@@ -103,7 +113,6 @@ import eZIPSDK
                 }
             }
         }
-        try? FileManager.default.removeItem(at: directory)
     }
     
     @objc public static func exportBin(source: UIImage, color: UIColor?) -> Data? {
@@ -346,9 +355,10 @@ import eZIPSDK
         let zipFilePath = qjsOutputPath(watchfaceName: watchfaceName)
         let folderURL = qjsToZipFolder(watchfaceName: watchfaceName)
 
+        // 删除目录下所有的文件
+        deleteDirectory(directory: zipFilePath)
+        
         do {
-            // 删除旧的
-            try? FileManager.default.removeItem(at: zipFilePath)
             try Zip.zipFiles(paths: [folderURL], zipFilePath: zipFilePath, password: nil, progress: { progress in
                 print("压缩进度：\(progress)")
                 if progress >= 1.0 {
@@ -587,6 +597,7 @@ import eZIPSDK
                     let temp = dir.appendingPathComponent(child)
                     if temp.hasDirectoryPath {
                         clearDirectory(dir: temp)
+                        try? FileManager.default.removeItem(at: temp)
                     } else {
                         try? FileManager.default.removeItem(at: temp)
                     }

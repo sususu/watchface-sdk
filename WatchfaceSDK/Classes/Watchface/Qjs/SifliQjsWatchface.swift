@@ -123,6 +123,8 @@ public class SifliQjsWatchface: NSObject {
             return Error.missingThumbnail
         }
         
+        QjsFileUtils.cleanUpHistory()
+        
         let isCreate = QjsFileUtils.createQjsTmpDir(watchfaceName: self.name)
         if !isCreate {
             return Error.createDirError
