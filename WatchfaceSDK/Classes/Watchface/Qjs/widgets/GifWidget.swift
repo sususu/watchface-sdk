@@ -9,7 +9,7 @@ class GifWidget: ValueWidget {
 
     override init() {
         super.init()
-        self.dependence = Dependence(module: "gif", path: "gif.js")
+        self.dependence = QjsDependence(module: "gif", path: "gif.js")
     }
 
     override func start() -> String {

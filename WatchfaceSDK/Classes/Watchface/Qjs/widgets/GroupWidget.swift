@@ -9,7 +9,7 @@ class GroupWidget: ValueWidget {
 
     override init() {
         super.init()
-        self.dependence = Dependence(module: "label", path: "label.js")
+        self.dependence = QjsDependence(module: "label", path: "label.js")
     }
 
     override func start() -> String {

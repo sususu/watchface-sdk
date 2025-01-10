@@ -12,7 +12,7 @@ class GifSelectionWidget: ValueWidget {
 
     override init() {
         super.init()
-        self.dependence = Dependence(module: "idxanimimg", path: "idxanimimg.js")
+        self.dependence = QjsDependence(module: "idxanimimg", path: "idxanimimg.js")
     }
 
     override func start() -> String {

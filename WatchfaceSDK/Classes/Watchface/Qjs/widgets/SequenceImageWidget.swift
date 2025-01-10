@@ -11,7 +11,7 @@ class SequenceImageWidget: ValueWidget {
 
     override init() {
         super.init()
-        self.dependence = Dependence(module: "seqframe", path: "seqframe.js")
+        self.dependence = QjsDependence(module: "seqframe", path: "seqframe.js")
     }
 
     override func start() -> String {

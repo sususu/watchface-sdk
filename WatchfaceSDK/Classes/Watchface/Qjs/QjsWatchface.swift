@@ -29,14 +29,14 @@ import UIKit
     
     @objc public func toQjs(_ isAOD: Bool = false) -> String {
         
-        let startFunc = Function(name: "start")
-        let pauseFunc = Function(name: "pause")
-        let resumeFunc = Function(name: "resume")
-        let refreshFunc = Function(name: "refresh")
-        let stopFunc = Function(name: "stop")
+        let startFunc = QjsFunction(name: "start")
+        let pauseFunc = QjsFunction(name: "pause")
+        let resumeFunc = QjsFunction(name: "resume")
+        let refreshFunc = QjsFunction(name: "refresh")
+        let stopFunc = QjsFunction(name: "stop")
         
-        var tmpDict: [String: Dependence] = [:]
-        var dependences = Dependence.baseDependences()
+        var tmpDict: [String: QjsDependence] = [:]
+        var dependences = QjsDependence.baseDependences()
         // var dependences: [Dependence] = baseDependences
         for widget in widgetList {
             var key = widget.getDependence()?.module ?? ""

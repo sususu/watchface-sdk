@@ -1,6 +1,6 @@
 import Foundation
 
-class Function: Qjs {
+class QjsFunction: Qjs {
     private var name: String
     private var body: String?
     private var arguments: [String]?

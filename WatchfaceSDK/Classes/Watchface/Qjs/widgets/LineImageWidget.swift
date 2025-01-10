@@ -6,7 +6,7 @@ class LineImageWidget: SingleImageWidget {
 
     override init() {
         super.init()
-        self.dependence = Dependence(module: "linegraph", path: "linegraph.js")
+        self.dependence = QjsDependence(module: "linegraph", path: "linegraph.js")
     }
 
     override func start() -> String {

@@ -9,7 +9,7 @@ class PointerWidget: SingleImageWidget {
 
     override init() {
         super.init()
-        self.dependence = Dependence(module: "pointer", path: "pointer.js")
+        self.dependence = QjsDependence(module: "pointer", path: "pointer.js")
     }
 
     override func start() -> String {

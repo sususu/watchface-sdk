@@ -19,7 +19,7 @@ class LinkTextWidget: TextWidget {
 
     override init() {
         super.init()
-        self.dependence = Dependence(module: "linklabel", path: "linklabel.js")
+        self.dependence = QjsDependence(module: "linklabel", path: "linklabel.js")
     }
 
     override func start() -> String {

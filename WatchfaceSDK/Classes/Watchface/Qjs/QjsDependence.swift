@@ -1,6 +1,6 @@
 import Foundation
 
-class Dependence: Qjs {
+class QjsDependence: Qjs {
     static let BASE_PATH = "/support_script/qjs/"
     var name: String?
     var module: String
@@ -14,22 +14,22 @@ class Dependence: Qjs {
     init(name: String, module: String, path: String) {
         self.name = name
         self.module = module
-        self.path = Dependence.BASE_PATH + path
+        self.path = QjsDependence.BASE_PATH + path
     }
 
     init(module: String, path: String) {
         self.module = module
-        self.path = Dependence.BASE_PATH + path
+        self.path = QjsDependence.BASE_PATH + path
     }
 
-    static func baseDependences() -> [Dependence] {
-        var list = [Dependence]()
-        let d1 = Dependence()
+    static func baseDependences() -> [QjsDependence] {
+        var list = [QjsDependence]()
+        let d1 = QjsDependence()
         d1.setName(name: "lv")
         d1.setModule(module: "*")
         d1.setPath(path: "lv")
 
-        let d2 = Dependence()
+        let d2 = QjsDependence()
         d2.setPath(path: "lvapp")
         d2.setModule(module: "app")
         list.append(d1)

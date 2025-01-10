@@ -11,7 +11,7 @@ class ArcWidget: ValueWidget {
 
     override init() {
         super.init()
-        self.dependence = Dependence(module: "roundbar", path: "roundbar.js")
+        self.dependence = QjsDependence(module: "roundbar", path: "roundbar.js")
     }
 
     override func start() -> String {

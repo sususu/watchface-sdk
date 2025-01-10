@@ -9,7 +9,7 @@ class OptionWidget: ValueWidget {
 
     override init() {
         super.init()
-        self.dependence = Dependence(module: "idximg", path: "idximg.js")
+        self.dependence = QjsDependence(module: "idximg", path: "idximg.js")
     }
 
     override func start() -> String {

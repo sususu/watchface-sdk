@@ -5,7 +5,7 @@ class AppLinkWidget: ValueWidget {
 
     override init() {
         super.init()
-        self.dependence = Dependence(module: "launcher", path: "launcher.js")
+        self.dependence = QjsDependence(module: "launcher", path: "launcher.js")
     }
 
     override func start() -> String {

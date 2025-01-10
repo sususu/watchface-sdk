@@ -8,7 +8,7 @@ class SingleImageWidget: ValueWidget {
 
     override init() {
         super.init()
-        self.dependence = Dependence(module: "img", path: "img.js")
+        self.dependence = QjsDependence(module: "img", path: "img.js")
     }
 
     @objc dynamic override func start() -> String {

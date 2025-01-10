@@ -7,7 +7,7 @@ class Widget: QjsLifeCycle {
     var nameSuffix: String = ""
     var location: Point = Point.zero
     var size: Size = Size.zero
-    var dependence: Dependence?
+    var dependence: QjsDependence?
     var jsVarName: String = ""
 
     func getName() -> String {
@@ -50,11 +50,11 @@ class Widget: QjsLifeCycle {
         self.size = size
     }
 
-    func getDependence() -> Dependence? {
+    func getDependence() -> QjsDependence? {
         return dependence
     }
 
-    func setDependence(_ dependence: Dependence) {
+    func setDependence(_ dependence: QjsDependence) {
         self.dependence = dependence
     }
 
