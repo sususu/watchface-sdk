@@ -7,7 +7,7 @@
 
 import UIKit
 
-@objc public class QjsWatchface: NSObject {
+public class QjsWatchface: NSObject {
     var id: Int64 = 0
     var width: Int = 466
     var height: Int = 466
@@ -27,7 +27,7 @@ import UIKit
         self.name = name
     }
     
-    @objc public func toQjs(_ isAOD: Bool = false) -> String {
+    public func toQjs(_ isAOD: Bool = false) -> String {
         
         let startFunc = QjsFunction(name: "start")
         let pauseFunc = QjsFunction(name: "pause")
