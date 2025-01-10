@@ -42,24 +42,24 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
             WatchfaceSDK.instance.FinishCallback = finishCallback
             WatchfaceSDK.instance.CompressSuccessCallback = compressSuccessCallback
             
-            FileUtils.deleteDirectory(directory: URL(fileURLWithPath: QjsAlbumModel().getAlbumSelectTempPath()))
+            QjsFileUtils.deleteDirectory(directory: URL(fileURLWithPath: QjsAlbumModel().getAlbumSelectTempPath()))
             
             for i in 0..<albums.count {
                 let model = albums[i]
                 
                 //整屏尺寸
                 if let resizedImage = self?.resizeImage(image: model.image!, targetSize: CGSize(width: self!.width, height: self!.height)) {
-                    FileUtils.exportAlbumBin(source: resizedImage, isTimeHand: false, fileName: "\(model.name!)", folderURL: URL(fileURLWithPath: model.getAlbumSelectTempPath()), isPng: true)
+                    QjsFileUtils.exportAlbumBin(source: resizedImage, isTimeHand: false, fileName: "\(model.name!)", folderURL: URL(fileURLWithPath: model.getAlbumSelectTempPath()), isPng: true)
                 }
                 
                 //预览图 1/3屏幕尺寸
                 if let preImage = self?.resizeImage(image: model.image!, targetSize: CGSize(width: self!.width / 3.0, height: self!.height / 3.0)) {
-                    FileUtils.exportAlbumBin(source: preImage, isTimeHand: false, fileName: "\(model.name!)", folderURL: URL(fileURLWithPath: model.getAlbumSelectTempPath()), isPng: false)
+                    QjsFileUtils.exportAlbumBin(source: preImage, isTimeHand: false, fileName: "\(model.name!)", folderURL: URL(fileURLWithPath: model.getAlbumSelectTempPath()), isPng: false)
                 }
                 
             }
             
-            FileUtils.packageQjsAlbum { [weak self]state in
+            QjsFileUtils.packageQjsAlbum { [weak self]state in
                 WatchfaceSDK.instance.CompressSuccessCallback(state)
                 if state {
                     self?.pushAlbum(devIdentifier: devIdentifier)
@@ -112,7 +112,7 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
             WatchfaceSDK.instance.FinishCallback = finishCallback
             WatchfaceSDK.instance.CompressSuccessCallback = compressCallback
             
-            FileUtils.packageQjsMp3(mp3FilePath: musicFilePath) { [weak self] state in
+            QjsFileUtils.packageQjsMp3(mp3FilePath: musicFilePath) { [weak self] state in
                 WatchfaceSDK.instance.CompressSuccessCallback(state)
                 if state {
                     self?.pushMusic(devIdentifier: devIdentifier)

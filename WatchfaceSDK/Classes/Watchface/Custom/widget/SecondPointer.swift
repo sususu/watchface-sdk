@@ -30,7 +30,7 @@ import UIKit
             return []
         }
         if let color = getTintColor() {
-            self.image = FileUtils.changeBitmapColor(originalBitmap: bitmap, color: color)
+            self.image = QjsFileUtils.changeBitmapColor(originalBitmap: bitmap, color: color)
         } else {
             self.image = bitmap
         }

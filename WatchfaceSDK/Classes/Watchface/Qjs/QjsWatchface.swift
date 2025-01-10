@@ -1,5 +1,5 @@
 //
-//  Watchface.swift
+//  QjsWatchface.swift
 //  WatchfaceSDK
 //
 //  Created by HuaWo on 2024/8/2.
@@ -7,14 +7,14 @@
 
 import UIKit
 
-@objc public class Watchface: NSObject {
+@objc public class QjsWatchface: NSObject {
     var id: Int64 = 0
     var width: Int = 466
     var height: Int = 466
     var widgetList: [Widget] = []
     var name: String
     var thumbnail: UIImage?
-    var aod: Watchface?
+    var aod: QjsWatchface?
     var isAOD: Bool = false
     
     init(name: String) {
@@ -123,12 +123,12 @@ import UIKit
             return Error.missingThumbnail
         }
         
-        let isCreate = FileUtils.createQjsTmpDir(watchfaceName: self.name)
+        let isCreate = QjsFileUtils.createQjsTmpDir(watchfaceName: self.name)
         if !isCreate {
             return Error.createDirError
         }
         
-        let success = FileUtils.exportBin(source: thumbnail!, isAOD: false, isTimeHand: false, fileName: "thumb.bin", watchfaceName: self.name)
+        let success = QjsFileUtils.exportBin(source: thumbnail!, isAOD: false, isTimeHand: false, fileName: "thumb.bin", watchfaceName: self.name)
         if !success {
             return Error.exportBinError
         }
@@ -153,7 +153,7 @@ import UIKit
         }
         
         if !mainJS.isEmpty {
-            let f = FileUtils.writeMainJS(content: mainJS, isAOD: false, watchfaceName: name)
+            let f = QjsFileUtils.writeMainJS(content: mainJS, isAOD: false, watchfaceName: name)
             if !f {
                 return Error.saveQjsFileError
             }
@@ -162,13 +162,13 @@ import UIKit
         }
         
         if !aodJS.isEmpty {
-            let f = FileUtils.writeMainJS(content: aodJS, isAOD: true, watchfaceName: name)
+            let f = QjsFileUtils.writeMainJS(content: aodJS, isAOD: true, watchfaceName: name)
             if !f {
                 return Error.saveQjsFileError
             }
         }
         
-        guard let url = FileUtils.packageQjs(name) else {
+        guard let url = QjsFileUtils.packageQjs(name) else {
             return Error.zipError
         }
         
@@ -177,8 +177,8 @@ import UIKit
     }
     
     
-    public func copy() -> Watchface {
-        let w = Watchface(name: self.name)
+    public func copy() -> QjsWatchface {
+        let w = QjsWatchface(name: self.name)
         w.width = width
         w.height = height
         w.thumbnail = thumbnail
@@ -190,7 +190,7 @@ import UIKit
         return w
     }
     
-    func exportBinFiles(watchface: Watchface, isAOD: Bool) -> Error? {
+    func exportBinFiles(watchface: QjsWatchface, isAOD: Bool) -> Error? {
         var bitmaps: [String: UIImage] = [:]
         var gifs: [String: URL] = [:]
         
@@ -256,7 +256,7 @@ import UIKit
         // 已经处理完毕，开始导出bin
         for (path, bitmap) in bitmaps {
             let isTimeHand = path.hasPrefix("point")
-            let success = FileUtils.exportBin(source: bitmap, isAOD: isAOD, isTimeHand: isTimeHand, fileName: path, watchfaceName: watchface.name)
+            let success = QjsFileUtils.exportBin(source: bitmap, isAOD: isAOD, isTimeHand: isTimeHand, fileName: path, watchfaceName: watchface.name)
             if !success {
                 return Error.exportBinError
             }
@@ -266,7 +266,7 @@ import UIKit
             do {
                 //URL(fileURLWithPath: gif.path)
                 let gifData = try Data(contentsOf: gif)
-                success = FileUtils.exportGifBin(source: gifData, isAOD: false, isTimeHand: false, fileName: path, watchfaceName: watchface.name)
+                success = QjsFileUtils.exportGifBin(source: gifData, isAOD: false, isTimeHand: false, fileName: path, watchfaceName: watchface.name)
             } catch {
                 print("无法获取数据: \(error)")
             }

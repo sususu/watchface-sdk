@@ -43,7 +43,7 @@ public typealias WatchfaceCallback = (URL?, Error?) ->()
     }
 
     public func makeZip(callback: @escaping WatchfaceCallback) {
-        let watchface = Watchface(name: "Ta")
+        let watchface = QjsWatchface(name: "Ta")
         watchface.name = getName()
         watchface.width = getWidth()
         watchface.height = getHeight()
@@ -54,7 +54,7 @@ public typealias WatchfaceCallback = (URL?, Error?) ->()
         }
         watchface.widgetList = qjsWidgets
 
-        let aod: Watchface = watchface
+        let aod: QjsWatchface = watchface
         aod.isAOD = true
 
         if let backgroundGif = backgroundGif {
@@ -64,7 +64,7 @@ public typealias WatchfaceCallback = (URL?, Error?) ->()
             gifWidget.size = Size(width: getWidth(), height: getHeight())
             gifWidget.location = Point(x: 0, y: 0)
             gifWidget.gif = backgroundGif
-            if let ff = FileUtils.getFirstFrameBitmapOfGif(gif: backgroundGif) {
+            if let ff = QjsFileUtils.getFirstFrameBitmapOfGif(gif: backgroundGif) {
                 gifWidget.gifPreview = ff
             }
             qjsWidgets.insert(gifWidget, at: 0)

@@ -40,7 +40,7 @@ import UIKit
                 continue
             }
             if let color = getTintColor() {
-                bitmapMap[key] = FileUtils.changeBitmapColor(originalBitmap: bitmap, color: color)
+                bitmapMap[key] = QjsFileUtils.changeBitmapColor(originalBitmap: bitmap, color: color)
             } else {
                 bitmapMap[key] = bitmap
             }

@@ -23,7 +23,7 @@ import UIKit
         
         // Change color
         if getTintColor() != nil {
-            self.image = FileUtils.changeBitmapColor(originalBitmap: bitmap, color: getTintColor()!)
+            self.image = QjsFileUtils.changeBitmapColor(originalBitmap: bitmap, color: getTintColor()!)
         } else {
             self.image = bitmap
         }

@@ -53,7 +53,7 @@ import UIKit
                 continue
             }
             if let color = getTintColor() {
-                bitmapMap[key] = FileUtils.changeBitmapColor(originalBitmap: bitmap, color: color)
+                bitmapMap[key] = QjsFileUtils.changeBitmapColor(originalBitmap: bitmap, color: color)
             } else {
                 bitmapMap[key] = bitmap
             }
@@ -65,7 +65,7 @@ import UIKit
                 
         if let img = UIImage.loadImage(named: colonImageName) {
             if let color = getTintColor() {
-                colonImg = FileUtils.changeBitmapColor(originalBitmap: img, color: color)
+                colonImg = QjsFileUtils.changeBitmapColor(originalBitmap: img, color: color)
             } else {
                 colonImg = img
             }

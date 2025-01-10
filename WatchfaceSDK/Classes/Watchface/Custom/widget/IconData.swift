@@ -49,7 +49,7 @@ public class IconData: AWidget {
             }
             dataImgHeight = Int(bitmap.size.height)
             if let color = getTintColor() {
-                bitmapMap[key] = FileUtils.changeBitmapColor(originalBitmap: bitmap, color: color)
+                bitmapMap[key] = QjsFileUtils.changeBitmapColor(originalBitmap: bitmap, color: color)
             } else {
                 bitmapMap[key] = bitmap
             }
@@ -63,7 +63,7 @@ public class IconData: AWidget {
             return []
         }
         if let color = getTintColor() {
-            iconBitmap = FileUtils.changeBitmapColor(originalBitmap: iconImg, color: color)
+            iconBitmap = QjsFileUtils.changeBitmapColor(originalBitmap: iconImg, color: color)
         } else {
             iconBitmap = iconImg
         }

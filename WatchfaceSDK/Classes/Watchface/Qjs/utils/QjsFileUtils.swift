@@ -4,7 +4,7 @@ import ImageIO
 import Zip
 import eZIPSDK
 
-@objc public class FileUtils : NSObject {
+@objc public class QjsFileUtils : NSObject {
     static let TAG = "FileUtils"
 
     /**
@@ -103,6 +103,7 @@ import eZIPSDK
                 }
             }
         }
+        try? FileManager.default.removeItem(at: directory)
     }
     
     @objc public static func exportBin(source: UIImage, color: UIColor?) -> Data? {
