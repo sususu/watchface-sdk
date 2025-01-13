@@ -248,13 +248,13 @@ class HWCustomDialViewController: UIViewController, UINavigationControllerDelega
         
         let color = timeImageView.tintColor ?? UIColor.white
         
-        let time = Time(tintColor: color)
+        let time = QjsTimeWidget(tintColor: color)
         time.x = (width - time.width) / 2
         time.y = 60
         time.id = 0
         watchface.widgetList.append(time)
         
-        let date = Date(tintColor: color)
+        let date = QjsDateWidget(tintColor: color)
         date.x = 150
         date.y = 200
         date.valueType = QjsValueType.dateNum.rawValue
@@ -262,7 +262,7 @@ class HWCustomDialViewController: UIViewController, UINavigationControllerDelega
         date.id = 2
         watchface.widgetList.append(date)
         
-        let week = Week(tintColor: color)
+        let week = QjsWeekWidget(tintColor: color)
         week.x = 220
         week.y = 200
         week.valueType = QjsValueType.weekData.rawValue
@@ -270,7 +270,7 @@ class HWCustomDialViewController: UIViewController, UINavigationControllerDelega
         week.id = 3
         watchface.widgetList.append(week)
         
-        let calorie = Calorie(tintColor: color)
+        let calorie = QjsCalorieWidget(tintColor: color)
         calorie.x = 40
         calorie.y = 300
         calorie.valueType = QjsValueType.calorieNum.rawValue
@@ -279,7 +279,7 @@ class HWCustomDialViewController: UIViewController, UINavigationControllerDelega
         calorie.id = 4
         watchface.widgetList.append(calorie)
         
-        let hr = Heartrate(tintColor: color)
+        let hr = QjsHeartrateWidget(tintColor: color)
         hr.x = 340
         hr.y = 300
         hr.valueType = QjsValueType.heartrateNum.rawValue
@@ -297,7 +297,7 @@ class HWCustomDialViewController: UIViewController, UINavigationControllerDelega
 //        step.id = 6
 //        watchface.widgetList.append(step)
         
-        let weather = WeatherTA(tintColor: UIColor.white)
+        let weather = QjsWeatherTAWidget(tintColor: UIColor.white)
         weather.x = 200
         weather.y = 380
         weather.valueType = QjsValueType.weatherNum.rawValue

@@ -1,7 +1,7 @@
 
 import UIKit
 
-@objc public class Durations: IconData {
+@objc public class QjsDurationsWidget: QjsIconDataWidget {
     public override init() {
         super.init()
         initDuration()
@@ -20,7 +20,7 @@ import UIKit
         setValueType(QjsValueType.activityTime.rawValue)
     }
     
-    public override func setIconAlign(_ align: Alignment) {
+    public override func setIconAlign(_ align: QjsAlignment) {
         super.setIconAlign(align)
         if align == .Left || align == .Right {
             width = 20 * 3 + 40

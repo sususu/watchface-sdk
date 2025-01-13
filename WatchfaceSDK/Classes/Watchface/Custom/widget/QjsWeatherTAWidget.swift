@@ -1,7 +1,7 @@
 
 import UIKit
 
-@objc public class WeatherTA: IconData {
+@objc public class QjsWeatherTAWidget: QjsIconDataWidget {
     
     private var weatherImages: [String] = []
     
@@ -41,7 +41,7 @@ import UIKit
         setIconAlign(.Left)
     }
     
-    public override func setIconAlign(_ align: Alignment) {
+    public override func setIconAlign(_ align: QjsAlignment) {
         super.setIconAlign(align)
         if align == .Left || align == .Right {
             width = 20 * 3 + 40

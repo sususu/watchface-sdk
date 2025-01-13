@@ -1,7 +1,7 @@
 
 import UIKit
 
-@objc public class Step: IconData {
+@objc public class QjsStepWidget: QjsIconDataWidget {
     public override init() {
         super.init()
         initStep()
@@ -20,7 +20,7 @@ import UIKit
         setValueType(QjsValueType.stepsNum.rawValue)
     }
     
-    public override func setIconAlign(_ align: Alignment) {
+    public override func setIconAlign(_ align: QjsAlignment) {
         super.setIconAlign(align)
         if align == .Left || align == .Right {
             width = 20 * 5 + 40

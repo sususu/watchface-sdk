@@ -1,7 +1,7 @@
 
 import UIKit
 
-@objc public class Date: AWidget {
+@objc public class QjsDateWidget: AWidget {
     var images: [Int: String] = [:]
 
     public override init() {

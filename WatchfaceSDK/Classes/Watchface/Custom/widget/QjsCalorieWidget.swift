@@ -1,7 +1,7 @@
 
 import UIKit
 
-@objc public class Calorie: IconData {
+@objc public class QjsCalorieWidget: QjsIconDataWidget {
     public override init() {
         super.init()
         initCalorie()
@@ -20,7 +20,7 @@ import UIKit
         setValueType(QjsValueType.calorieNum.rawValue)
     }
     
-    public override func setIconAlign(_ align: Alignment) {
+    public override func setIconAlign(_ align: QjsAlignment) {
         super.setIconAlign(align)
         if align == .Left || align == .Right {
             width = 20 * 4 + 40

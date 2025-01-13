@@ -1,7 +1,7 @@
 
 import UIKit
 
-@objc public class PointerWidgets: AWidget {
+@objc public class QjsPointerWidget: AWidget {
     var center = Point.zero
     var rotationCenter = Point.zero
     var image: UIImage?

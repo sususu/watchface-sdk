@@ -1,17 +1,17 @@
 import UIKit
 
-@objc public enum Alignment: Int {
+@objc public enum QjsAlignment: Int {
     case Top
     case Right
     case Bottom
     case Left
 }
 
-public class IconData: AWidget {
+public class QjsIconDataWidget: AWidget {
     var icon: String?
     var images: [Int: String] = [:]
     var iconOffset: Int = 0
-    var iconAlign: Alignment = .Top
+    var iconAlign: QjsAlignment = .Top
 
     public override init() {
         super.init()
@@ -172,7 +172,7 @@ public class IconData: AWidget {
         return images
     }
                                         
-    public func setIconAlign(_ align: Alignment) {
+    public func setIconAlign(_ align: QjsAlignment) {
         self.iconAlign = align
     }
 }

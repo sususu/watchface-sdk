@@ -1,7 +1,7 @@
 
 import UIKit
 
-@objc public class Dot: AWidget {
+@objc public class QjsDotWidget: AWidget {
     var center: CGPoint?
     var image: UIImage?
 

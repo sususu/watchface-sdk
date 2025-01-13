@@ -1,7 +1,7 @@
 
 import UIKit
 
-@objc public class MinutePointer: PointerWidgets {
+@objc public class QjsMinutePointerWidget: QjsPointerWidget {
     private var imageName: String = "pointer_min.png"
 
     public override init(watchfaceSize: Size) {

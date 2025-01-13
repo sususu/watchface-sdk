@@ -1,26 +1,26 @@
 
 import UIKit
 
-@objc public class Battery: IconData {
+@objc public class QjsHeartrateWidget: QjsIconDataWidget {
     public override init() {
         super.init()
-        initBattery()
+        initHeartrate()
     }
 
     @objc public override init(tintColor: UIColor) {
         super.init(tintColor: tintColor)
-        initBattery()
+        setName("Heartrate")
+        initHeartrate()
     }
 
-    private func initBattery() {
-        setName("Battery")
-        // max value is 100
+    private func initHeartrate() {
+        // max value is 255
         width = 20 * 3
-        setIcon("icon_battery.png")
-        setValueType(QjsValueType.batteryNum.rawValue)
+        setIcon("icon_heart.png")
+        setValueType(QjsValueType.heartrateNum.rawValue)
     }
     
-    public override func setIconAlign(_ align: Alignment) {
+    public override func setIconAlign(_ align: QjsAlignment) {
         super.setIconAlign(align)
         if align == .Left || align == .Right {
             width = 20 * 3 + 40
