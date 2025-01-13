@@ -91,6 +91,6 @@ class Widget: QjsLifeCycle {
     }
     
     func copy() -> Widget {
-        
+        return Widget()
     }
 }

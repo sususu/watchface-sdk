@@ -58,7 +58,7 @@ public class SifliQjsWatchface: NSObject {
         sb.append("class \(prefix)\(name) extends app {\n")
         sb += "\tconstructor() {\n"
         sb += "\t\tsuper(\(type));\n"
-        sb += "\t}\n" 
+        sb += "\t}\n"
         var refreshBody = ""
         var startBody = ""
         var resumeBody = ""
@@ -101,19 +101,22 @@ public class SifliQjsWatchface: NSObject {
         sb += "globalThis.\(prefix)\(name) = \(prefix)\(name);\n"
         var result = headers + "\n"
         result += sb + "\n"
-        return result        
+        return result
     }
     
     public func makeZip(callback: @escaping (URL?, Error?) -> Void) {
         DispatchQueue.global().async { [weak self] in
+            guard let strongSelf = self else {
+                callback(nil, Error.zipError);
+                return
+            }
             DispatchQueue.main.async {
-                if let error = self?.packageZip() {
-                    callback(self?.zipUrl, error)
+                if let error = strongSelf.packageZip() {
+                    callback(strongSelf.zipUrl, error)
                 } else {
-                    callback(self?.zipUrl, nil)
+                    callback(strongSelf.zipUrl, nil)
                 }
             }
-            
         }
     }
     
@@ -135,7 +138,7 @@ public class SifliQjsWatchface: NSObject {
             return Error.exportBinError
         }
 
-        let error = exportBinFiles(watchface: self,isAOD: false)
+        let error = exportBinFiles(watchface: self, isAOD: false)
         if error != nil {
             return error
         }
@@ -151,7 +154,7 @@ public class SifliQjsWatchface: NSObject {
         let mainJS = toQjs()
         var aodJS = ""
         if aod != nil {
-            aodJS = aod!.toQjs()
+            aodJS = aod!.toQjs(true)
         }
         
         if !mainJS.isEmpty {
@@ -200,14 +203,14 @@ public class SifliQjsWatchface: NSObject {
         var bitmaps: [String: UIImage] = [:]
         var gifs: [String: URL] = [:]
         
-        for (i, widget) in widgetList.enumerated() {
+        for (i, widget) in watchface.widgetList.enumerated() {
             if let lineImageWidget = widget as? LineImageWidget, let image = lineImageWidget.image {
-                let imgName = "lineRes\(i).bin"
+                let imgName = "lnRs\(i).bin"
                 lineImageWidget.imagePath = imgName
                 bitmaps[imgName] = image
             }
             else if let pointerWidget = widget as? PointerWidget, let image = pointerWidget.image {
-                let imgName = "point\(i).bin"
+                let imgName = "pnt\(i).bin"
                 pointerWidget.imagePath = imgName
                 bitmaps[imgName] = image
             }
@@ -218,7 +221,7 @@ public class SifliQjsWatchface: NSObject {
             }
             else if let optionWidget = widget as? OptionWidget {
                 let images = optionWidget.images
-                let prefix = "option\(i)_"
+                let prefix = "opt\(i)_"
                 var imagePaths: [String] = []
                 for (suffix, bitmap) in images {
                     let imgName = "\(prefix)\(suffix).bin"
@@ -230,7 +233,7 @@ public class SifliQjsWatchface: NSObject {
             }
             else if let groupWidget = widget as? GroupWidget {
                 let images = groupWidget.images
-                let prefix = "group\(i)_"
+                let prefix = "grp\(i)_"
                 var imagePaths: [Int: String] = [:]
                 for (key, bitmap) in images {
                     let imgName = "\(prefix)\(String(key, radix: 16)).bin"
@@ -261,7 +264,7 @@ public class SifliQjsWatchface: NSObject {
         
         // 已经处理完毕，开始导出bin
         for (path, bitmap) in bitmaps {
-            let isTimeHand = path.hasPrefix("point")
+            let isTimeHand = path.hasPrefix("pnt")
             let success = QjsFileUtils.exportBin(source: bitmap, isAOD: isAOD, isTimeHand: isTimeHand, fileName: path, watchfaceName: watchface.name)
             if !success {
                 return Error.exportBinError

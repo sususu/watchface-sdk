@@ -12,6 +12,8 @@ public typealias WatchfaceCallback = (URL?, Error?) ->()
     @objc public var backgroundGif: URL?
     @objc public var widgetList: [AWidget] = []
     public var callback: WatchfaceCallback!
+    
+    private var qjsWf: SifliQjsWatchface?
 
     @objc public init(width: Int = 0, height: Int = 0) {
         self.width = width
@@ -80,7 +82,14 @@ public typealias WatchfaceCallback = (URL?, Error?) ->()
         watchface.thumbnail = thumbnailImage
         watchface.widgetList = qjsWidgets
         watchface.aod = aod
-        watchface.makeZip(callback: callback)
+        watchface.makeZip { url, err in
+            callback(url, err)
+        }
+        self.qjsWf = watchface;
+        self.qjsWf?.makeZip(callback: {[weak self] url, err in
+            callback(url, err)
+            self?.qjsWf = nil;
+        })
     }
 
     func getName() -> String {
