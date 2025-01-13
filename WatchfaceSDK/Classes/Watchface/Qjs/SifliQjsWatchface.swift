@@ -141,7 +141,7 @@ public class SifliQjsWatchface: NSObject {
         }
         
         if aod != nil {
-            let aodError = exportBinFiles(watchface: self.aod!,isAOD: true)
+            let aodError = exportBinFiles(watchface: self.aod!, isAOD: true)
             if aodError != nil {
                 return aodError
             }
@@ -188,7 +188,11 @@ public class SifliQjsWatchface: NSObject {
         w.isAOD = isAOD
         w.name = name
         w.id = id
-        w.widgetList = widgetList
+        var list: [Widget] = []
+        for widget in widgetList {
+            list.append(widget.copy())
+        }
+        w.widgetList = list
         return w
     }
     

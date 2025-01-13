@@ -91,4 +91,18 @@ class SequenceImageWidget: ValueWidget {
     func setStartDelay(_ startDelay: Int) {
         self.startDelay = startDelay
     }
+    
+    override func copy() -> Widget {
+        let obj = SequenceImageWidget()
+        obj.location = self.location
+        obj.size = self.size
+        obj.valueType = self.valueType
+        obj.images = self.images
+        obj.imagePaths = self.imagePaths
+        obj.resMode = self.resMode
+        obj.imagePrefix = self.imagePrefix
+        obj.resInterval = self.resInterval
+        obj.startDelay = self.startDelay
+        return obj
+    }
 }

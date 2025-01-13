@@ -96,4 +96,16 @@ class TextWidget: ValueWidget {
     func setFontSize(_ fontSize: Int) {
         self.fontSize = fontSize
     }
+    
+    override func copy() -> Widget {
+        let obj = TextWidget()
+        obj.location = self.location
+        obj.size = self.size
+        obj.valueType = self.valueType
+        obj.alignment = self.alignment
+        obj.color = self.color
+        obj.fontFamily = self.fontFamily
+        obj.fontSize = self.fontSize
+        return obj
+    }
 }

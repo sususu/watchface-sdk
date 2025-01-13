@@ -108,5 +108,20 @@ class ArcWidget: ValueWidget {
     func setEndAngle(_ endAngle: Int) {
         self.endAngle = endAngle
     }
+    
+    override func copy() -> Widget {
+        let obj = ArcWidget()
+        obj.location = self.location
+        obj.size = self.size
+        obj.valueType = self.valueType
+        obj.lineWidth = self.lineWidth
+        obj.cap = self.cap
+        obj.foreColor = self.foreColor
+        obj.backColor = self.backColor
+        obj.startAngle = self.startAngle
+        obj.endAngle = self.endAngle
+        
+        return obj
+    }
 }
 

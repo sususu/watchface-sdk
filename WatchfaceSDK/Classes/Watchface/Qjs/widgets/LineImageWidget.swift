@@ -59,4 +59,16 @@ class LineImageWidget: SingleImageWidget {
     func setCap(_ cap: Bool) {
         self.cap = cap
     }
+    
+    override func copy() -> Widget {
+        let obj = LineImageWidget()
+        obj.location = self.location
+        obj.size = self.size
+        obj.valueType = self.valueType
+        obj.cap = self.cap
+        obj.image = self.image
+        obj.imagePath = self.imagePath
+        
+        return obj
+    }
 }

@@ -19,4 +19,13 @@ class AppLinkWidget: ValueWidget {
         sb += "\t\t\(name).set_type(\(getValueType()));\n"
         return sb
     }
+    
+    override func copy() -> Widget {
+        let obj = AppLinkWidget()
+        obj.location = self.location
+        obj.size = self.size
+        obj.valueType = self.valueType
+        
+        return obj
+    }
 }

@@ -132,4 +132,21 @@ class LinkTextWidget: TextWidget {
     func setSecondValue(_ secondValue: Int) {
         self.secondValue = secondValue
     }
+    
+    override func copy() -> Widget {
+        let obj = LinkTextWidget()
+        obj.location = self.location
+        obj.size = self.size
+        obj.valueType = self.valueType
+        obj.alignment = self.alignment
+        obj.color = self.color
+        obj.fontFamily = self.fontFamily
+        obj.fontSize = self.fontSize
+        obj.linkSymbol = self.linkSymbol
+        obj.contentDisplayType = self.contentDisplayType
+        obj.secondValueType = self.secondValueType
+        obj.secondText = self.secondText
+        
+        return obj
+    }
 }

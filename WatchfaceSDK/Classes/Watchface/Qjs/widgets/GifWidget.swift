@@ -85,4 +85,17 @@ class GifWidget: ValueWidget {
     func setGifPreviewPath(_ gifPreviewPath: String) {
         self.gifPreviewPath = gifPreviewPath
     }
+    
+    override func copy() -> Widget {
+        let obj = GifWidget()
+        obj.location = self.location
+        obj.size = self.size
+        obj.valueType = self.valueType
+        obj.gif = self.gif
+        obj.gifPreview = self.gifPreview
+        obj.gifPath = self.gifPath
+        obj.gifPreviewPath = self.gifPreviewPath
+        
+        return obj
+    }
 }

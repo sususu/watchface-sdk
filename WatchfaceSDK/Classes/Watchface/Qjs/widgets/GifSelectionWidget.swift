@@ -118,4 +118,20 @@ class GifSelectionWidget: ValueWidget {
     func setGifPaths(_ gifPaths: [String]) {
         self.gifPaths = gifPaths
     }
+    
+    override func copy() -> Widget {
+        let obj = GifSelectionWidget()
+        obj.location = self.location
+        obj.size = self.size
+        obj.valueType = self.valueType
+        obj.gifs = self.gifs
+        obj.gifPaths = self.gifPaths
+        obj.startDelay = self.startDelay
+        obj.playInterval = self.playInterval
+        obj.maxCount = self.maxCount
+        obj.loop = self.loop
+        obj.imagePrefix = self.imagePrefix
+        
+        return obj
+    }
 }

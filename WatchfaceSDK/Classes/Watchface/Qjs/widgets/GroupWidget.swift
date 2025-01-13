@@ -94,4 +94,17 @@ class GroupWidget: ValueWidget {
     func setAlignment(_ alignment: NSTextAlignment) {
         self.alignment = alignment
     }
+    
+    override func copy() -> Widget {
+        let obj = GroupWidget()
+        obj.location = self.location
+        obj.size = self.size
+        obj.valueType = self.valueType
+        obj.images = self.images
+        obj.imagePaths = self.imagePaths
+        obj.imagePrefix = self.imagePrefix
+        obj.alignment = self.alignment
+        
+        return obj
+    }
 }

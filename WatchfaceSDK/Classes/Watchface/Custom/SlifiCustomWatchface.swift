@@ -54,7 +54,7 @@ public typealias WatchfaceCallback = (URL?, Error?) ->()
         }
         watchface.widgetList = qjsWidgets
 
-        let aod: SifliQjsWatchface = watchface
+        let aod: SifliQjsWatchface = watchface.copy()
         aod.isAOD = true
 
         if let backgroundGif = backgroundGif {

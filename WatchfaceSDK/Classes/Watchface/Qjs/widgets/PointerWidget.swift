@@ -85,4 +85,18 @@ class PointerWidget: SingleImageWidget {
     func setEndAngle(_ endAngle: Int) {
         self.endAngle = endAngle
     }
+    
+    override func copy() -> Widget {
+        let obj = PointerWidget()
+        obj.location = self.location
+        obj.size = self.size
+        obj.valueType = self.valueType
+        obj.image = self.image
+        obj.imagePath = self.imagePath
+        obj.centerPoint = self.centerPoint
+        obj.rotationCenterPoint = self.rotationCenterPoint
+        obj.startAngle = self.startAngle
+        obj.endAngle = self.endAngle
+        return obj
+    }
 }

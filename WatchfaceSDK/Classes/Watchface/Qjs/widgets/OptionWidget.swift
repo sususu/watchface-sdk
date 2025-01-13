@@ -77,4 +77,16 @@ class OptionWidget: ValueWidget {
     func setImagePrefix(_ imagePrefix: String) {
         self.imagePrefix = imagePrefix
     }
+    
+    override func copy() -> Widget {
+        let obj = OptionWidget()
+        obj.location = self.location
+        obj.size = self.size
+        obj.valueType = self.valueType
+        obj.imagePrefix = self.imagePrefix
+        obj.images = self.images
+        obj.imagePaths = self.imagePaths
+        obj.maxCount = self.maxCount
+        return obj
+    }
 }

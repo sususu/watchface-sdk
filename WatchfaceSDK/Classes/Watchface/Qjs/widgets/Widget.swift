@@ -89,4 +89,8 @@ class Widget: QjsLifeCycle {
     func toQjs(_ isAOD: Bool) -> String {
         return ""
     }
+    
+    func copy() -> Widget {
+        
+    }
 }
