@@ -48,7 +48,7 @@ class GroupWidget: ValueWidget {
             // 绑定数据
             sb += "\t\t\(name).bind(\(getValueType()), function(idx, val) {\n"
             sb += "\t\t\t\(textName) = lv.app_db_get_val_text(\(getValueType()));\n"
-            sb += "\t\t\t\(name).set_text(\(textName));\n"
+            sb += "\t\t\tthis.set_text(\(textName));\n"
             sb += "\t\t})\n"
         }
         return sb
