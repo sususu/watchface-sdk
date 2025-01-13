@@ -42,13 +42,13 @@ class HWAlbumViewController: UIViewController {
         album2.name = "2"
         
         let albums = [album1,album2]
-        WatchfaceSDK.getInstance().width = 480.0
-        WatchfaceSDK.getInstance().height = 480.0
+        SifliWatchfaceSDK.getInstance().width = 480.0
+        SifliWatchfaceSDK.getInstance().height = 480.0
         
         
         if let device:HwBluetoothDevice = HwBluetoothCenter.sharedInstance().connectedDevice {
             
-            WatchfaceSDK.getInstance().setPictures(devIdentifier: device.peripheral.identifier.uuidString, compressSuccessCallback: { iscompressSuccess in
+            SifliWatchfaceSDK.getInstance().setPictures(devIdentifier: device.peripheral.identifier.uuidString, compressSuccessCallback: { iscompressSuccess in
                 if iscompressSuccess {
                     print("Compression success")
                 } else {

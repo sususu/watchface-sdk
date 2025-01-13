@@ -308,7 +308,7 @@ class HWCustomDialViewController: UIViewController, UINavigationControllerDelega
 
         
         if let device:HwBluetoothDevice = HwBluetoothCenter.sharedInstance().connectedDevice {
-            WatchfaceSDK.getInstance().setCustomWatchface(devIdentifier: device.peripheral.identifier.uuidString, watchface: watchface) { iscompressSuccess in
+            SifliWatchfaceSDK.getInstance().setCustomWatchface(devIdentifier: device.peripheral.identifier.uuidString, watchface: watchface) { iscompressSuccess in
                 if iscompressSuccess {
                     print("Compression success")
                 } else {

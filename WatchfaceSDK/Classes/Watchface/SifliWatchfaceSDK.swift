@@ -6,9 +6,9 @@ public typealias QjsWatchfaceFinishCallback = (Bool, String?, Int,NSNumber) ->()
 public typealias QjsWatchfaceProgressCallback = (Int) ->()
 public typealias QjsCompresSuccessCallback = (Bool) ->()
 
-@objc public class WatchfaceSDK: NSObject {
+@objc public class SifliWatchfaceSDK: NSObject {
     private var hadInit = false
-    private static let instance = WatchfaceSDK()
+    private static let instance = SifliWatchfaceSDK()
     private var pushManager = SFDialPlateManager.share
     
     @objc public var width: Double = 466.0
@@ -18,7 +18,7 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
     @objc public var FinishCallback: QjsWatchfaceFinishCallback!
     @objc public var CompressSuccessCallback: QjsCompresSuccessCallback!
     
-    @objc public static func getInstance() -> WatchfaceSDK {
+    @objc public static func getInstance() -> SifliWatchfaceSDK {
         return instance
     }
     
@@ -38,9 +38,9 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
         assert(hadInit, "Please call WatchfaceSDK.getInstance().initSDK(application: UIApplication) before using any API")
         
         DispatchQueue.global().async { [weak self] in
-            WatchfaceSDK.instance.ProgressCallback = progressCallback
-            WatchfaceSDK.instance.FinishCallback = finishCallback
-            WatchfaceSDK.instance.CompressSuccessCallback = compressSuccessCallback
+            SifliWatchfaceSDK.instance.ProgressCallback = progressCallback
+            SifliWatchfaceSDK.instance.FinishCallback = finishCallback
+            SifliWatchfaceSDK.instance.CompressSuccessCallback = compressSuccessCallback
             
             QjsFileUtils.deleteDirectory(directory: URL(fileURLWithPath: QjsAlbumModel().getAlbumSelectTempPath()))
             
@@ -60,7 +60,7 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
             }
             
             QjsFileUtils.packageQjsAlbum { [weak self]state in
-                WatchfaceSDK.instance.CompressSuccessCallback(state)
+                SifliWatchfaceSDK.instance.CompressSuccessCallback(state)
                 if state {
                     self?.pushAlbum(devIdentifier: devIdentifier)
                 }
@@ -108,12 +108,12 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
         assert(hadInit, "Please call WatchfaceSDK.getInstance().initSDK(application: UIApplication) before using any API")
         
         DispatchQueue.global().async { [weak self] in
-            WatchfaceSDK.instance.ProgressCallback = progressCallback
-            WatchfaceSDK.instance.FinishCallback = finishCallback
-            WatchfaceSDK.instance.CompressSuccessCallback = compressCallback
+            SifliWatchfaceSDK.instance.ProgressCallback = progressCallback
+            SifliWatchfaceSDK.instance.FinishCallback = finishCallback
+            SifliWatchfaceSDK.instance.CompressSuccessCallback = compressCallback
             
             QjsFileUtils.packageQjsMp3(mp3FilePath: musicFilePath) { [weak self] state in
-                WatchfaceSDK.instance.CompressSuccessCallback(state)
+                SifliWatchfaceSDK.instance.CompressSuccessCallback(state)
                 if state {
                     self?.pushMusic(devIdentifier: devIdentifier)
                 }
@@ -154,14 +154,14 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
         watchface.makeZip { [weak self]zipUrl, error in
             if (error != nil) {
                 print("zip compression error:\(String(describing: error))")
-                WatchfaceSDK.instance.CompressSuccessCallback(false);
+                SifliWatchfaceSDK.instance.CompressSuccessCallback(false);
             } else {
                 if let zip: URL = zipUrl {
-                    WatchfaceSDK.instance.CompressSuccessCallback(true)
+                    SifliWatchfaceSDK.instance.CompressSuccessCallback(true)
                     self?.syncZipFile(devIdentifier: devIdentifier, filePath: zip)
                 } else {
                     print("zipUrl is nil")
-                    WatchfaceSDK.instance.CompressSuccessCallback(false)
+                    SifliWatchfaceSDK.instance.CompressSuccessCallback(false)
 
                 }
             }
@@ -215,7 +215,7 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
 }
 
 
-extension WatchfaceSDK: SFDialPlateManagerDelegate {
+extension SifliWatchfaceSDK: SFDialPlateManagerDelegate {
     //思澈表盘推送代理回调
     public func dialPlateManager(manager: SFDialPlateSDK.SFDialPlateManager, didUpdateBLEState bleState: SFDialPlateSDK.DPBleCoreManagerState) {
         print("蓝牙状态改变:\(bleState.rawValue)")
@@ -223,7 +223,7 @@ extension WatchfaceSDK: SFDialPlateManagerDelegate {
     
     public func dialPlateManager(manager: SFDialPlateSDK.SFDialPlateManager, progress: Int) {
         print("推送进度:\(progress)%")
-        WatchfaceSDK.instance.ProgressCallback(progress)
+        SifliWatchfaceSDK.instance.ProgressCallback(progress)
     }
     
     public func dialPlateManager(manager: SFDialPlateSDK.SFDialPlateManager, complete error: SFDialPlateSDK.SFError?) {
@@ -232,10 +232,10 @@ extension WatchfaceSDK: SFDialPlateManagerDelegate {
             print("推送失败:\(err)")
             let errInfo: String = err.errInfo
             
-            WatchfaceSDK.instance.FinishCallback(false,errInfo,err.errType.rawValue,error?.devErrorCode ?? NSNumber(value: 0))
+            SifliWatchfaceSDK.instance.FinishCallback(false,errInfo,err.errType.rawValue,error?.devErrorCode ?? NSNumber(value: 0))
             return
         }
-        WatchfaceSDK.instance.FinishCallback(true,"",0,error?.devErrorCode ?? NSNumber(value: 0))
+        SifliWatchfaceSDK.instance.FinishCallback(true,"",0,error?.devErrorCode ?? NSNumber(value: 0))
         print("推送成功")
     }
 }

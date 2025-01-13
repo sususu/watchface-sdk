@@ -39,7 +39,7 @@ class HWOnlineDialViewController: UIViewController {
             
             if let device:HwBluetoothDevice = HwBluetoothCenter.sharedInstance().connectedDevice {
                 
-                WatchfaceSDK.getInstance().setOnlineWatchface(devIdentifier: device.peripheral.identifier.uuidString, filePath: zipFileURL) { progress in
+                SifliWatchfaceSDK.getInstance().setOnlineWatchface(devIdentifier: device.peripheral.identifier.uuidString, filePath: zipFileURL) { progress in
                     
                     print("progress: \(progress)")
                     

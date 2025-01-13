@@ -7,7 +7,7 @@ import UIKit
     case Left
 }
 
-public class QjsIconDataWidget: AWidget {
+public class QjsIconDataWidget: QjsWidget {
     var icon: String?
     var images: [Int: String] = [:]
     var iconOffset: Int = 0

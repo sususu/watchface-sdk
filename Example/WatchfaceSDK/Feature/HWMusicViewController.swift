@@ -70,7 +70,7 @@ class HWMusicViewController: UIViewController {
         let musicDirectoryURL = URL(string: musicDirectory)!
 
         if let device:HwBluetoothDevice = HwBluetoothCenter.sharedInstance().connectedDevice {
-            WatchfaceSDK.getInstance().setMusicFiles(devIdentifier: device.peripheral.identifier.uuidString, musicFilePath: musicDirectoryURL) { iscompressSuccess in
+            SifliWatchfaceSDK.getInstance().setMusicFiles(devIdentifier: device.peripheral.identifier.uuidString, musicFilePath: musicDirectoryURL) { iscompressSuccess in
                 if iscompressSuccess {
                     print("Compression success")
                 } else {

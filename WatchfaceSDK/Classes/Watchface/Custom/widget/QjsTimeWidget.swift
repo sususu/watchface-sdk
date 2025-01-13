@@ -1,7 +1,7 @@
 
 import UIKit
 
-@objc public class QjsTimeWidget: AWidget {
+@objc public class QjsTimeWidget: QjsWidget {
     private var images: [Int: String] = [:]
     private var colonImageName: String = "time_b_25.png"
     private var hourNumbersSize: Size

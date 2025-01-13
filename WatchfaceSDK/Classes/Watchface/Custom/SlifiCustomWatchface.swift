@@ -10,7 +10,7 @@ public typealias WatchfaceCallback = (URL?, QjsError?) ->()
     @objc public var backgroundImage: UIImage?
     @objc public var thumbnailImage: UIImage?
     @objc public var backgroundGif: URL?
-    @objc public var widgetList: [AWidget] = []
+    @objc public var widgetList: [QjsWidget] = []
     public var callback: WatchfaceCallback!
     
     private var qjsWf: SifliQjsWatchface?
@@ -20,11 +20,11 @@ public typealias WatchfaceCallback = (URL?, QjsError?) ->()
         self.height = height
     }
 
-    @objc public func addWidget(_ widget: AWidget) {
+    @objc public func addWidget(_ widget: QjsWidget) {
         widgetList.append(widget)
     }
 
-    @objc public func removeWidget(_ widget: AWidget) {
+    @objc public func removeWidget(_ widget: QjsWidget) {
         if let index = widgetList.firstIndex(where: { $0.id == widget.id }) {
             widgetList.remove(at: index)
         }
@@ -40,7 +40,7 @@ public typealias WatchfaceCallback = (URL?, QjsError?) ->()
         widgetList.removeAll()
     }
 
-    func syncToWatch(devIdentifier: String, callback: Callback) {
+    func syncToWatch(devIdentifier: String, callback: QjsCallback) {
 //        WatchfaceSDK.getInstance().setCustomWatchface(devIdentifier: devIdentifier, watchface: self, callback: callback)
     }
 
@@ -140,11 +140,11 @@ public typealias WatchfaceCallback = (URL?, QjsError?) ->()
         self.backgroundGif = backgroundGif
     }
 
-    func getWidgetList() -> [AWidget] {
+    func getWidgetList() -> [QjsWidget] {
         return widgetList
     }
 
-    func setWidgetList(_ widgetList: [AWidget]) {
+    func setWidgetList(_ widgetList: [QjsWidget]) {
         self.widgetList = widgetList
     }
 }

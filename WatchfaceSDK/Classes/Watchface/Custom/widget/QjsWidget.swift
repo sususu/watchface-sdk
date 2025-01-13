@@ -1,7 +1,7 @@
 
 import UIKit
 
-@objc public class AWidget: NSObject {
+@objc public class QjsWidget: NSObject {
     @objc public var id: Int
     @objc public var width: Int
     @objc public var height: Int

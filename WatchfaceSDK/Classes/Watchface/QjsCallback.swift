@@ -1,7 +1,7 @@
 
 import Foundation
 
-@objc public protocol Callback {
+@objc public protocol QjsCallback {
     /**
      * zip file will be deleted, if return true, if you don't want it to be deleted, override callback return false, or you can save the file before returning true
      * @param zip
@@ -13,7 +13,7 @@ import Foundation
     func onSuccess()
 }
 
-extension Callback {
+extension QjsCallback {
     func onZipCompleted(zip: URL) {
         // Default implementation
     }
