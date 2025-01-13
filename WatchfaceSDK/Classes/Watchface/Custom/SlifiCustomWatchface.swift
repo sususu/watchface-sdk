@@ -1,7 +1,7 @@
 
 import UIKit
 
-public typealias WatchfaceCallback = (URL?, Error?) ->()
+public typealias WatchfaceCallback = (URL?, QjsError?) ->()
 
 @objc public class SlifiCustomWatchface: NSObject {
     @objc public var name: String = "custom"

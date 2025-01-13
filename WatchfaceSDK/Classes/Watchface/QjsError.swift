@@ -1,7 +1,7 @@
 
 import Foundation
 
-@objc public enum Error: Int {
+@objc public enum QjsError: Int {
     case none = 0
     case unknownError = 4000
     case createDirError = 4100
@@ -15,7 +15,7 @@ import Foundation
     case missingWidgetImages = 4504
     case manualStop = 4766
 
-    static func valueOf(_ value: Int) -> Error {
+    static func valueOf(_ value: Int) -> QjsError {
         switch value {
             case 0: return .none
             case 4000: return .unknownError

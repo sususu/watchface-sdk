@@ -104,10 +104,10 @@ public class SifliQjsWatchface: NSObject {
         return result
     }
     
-    public func makeZip(callback: @escaping (URL?, Error?) -> Void) {
+    public func makeZip(callback: @escaping (URL?, QjsError?) -> Void) {
         DispatchQueue.global().async { [weak self] in
             guard let strongSelf = self else {
-                callback(nil, Error.zipError);
+                callback(nil, QjsError.zipError);
                 return
             }
             DispatchQueue.main.async {
@@ -121,21 +121,21 @@ public class SifliQjsWatchface: NSObject {
     }
     
     private var zipUrl: URL?
-    private func packageZip() -> Error? {
+    private func packageZip() -> QjsError? {
         if thumbnail == nil {
-            return Error.missingThumbnail
+            return QjsError.missingThumbnail
         }
         
         QjsFileUtils.cleanUpHistory()
         
         let isCreate = QjsFileUtils.createQjsTmpDir(watchfaceName: self.name)
         if !isCreate {
-            return Error.createDirError
+            return QjsError.createDirError
         }
         
         let success = QjsFileUtils.exportBin(source: thumbnail!, isAOD: false, isTimeHand: false, fileName: "thumb.bin", watchfaceName: self.name)
         if !success {
-            return Error.exportBinError
+            return QjsError.exportBinError
         }
 
         let error = exportBinFiles(watchface: self, isAOD: false)
@@ -160,21 +160,21 @@ public class SifliQjsWatchface: NSObject {
         if !mainJS.isEmpty {
             let f = QjsFileUtils.writeMainJS(content: mainJS, isAOD: false, watchfaceName: name)
             if !f {
-                return Error.saveQjsFileError
+                return QjsError.saveQjsFileError
             }
         } else {
-            return Error.qjsFileEmpty
+            return QjsError.qjsFileEmpty
         }
         
         if !aodJS.isEmpty {
             let f = QjsFileUtils.writeMainJS(content: aodJS, isAOD: true, watchfaceName: name)
             if !f {
-                return Error.saveQjsFileError
+                return QjsError.saveQjsFileError
             }
         }
         
         guard let url = QjsFileUtils.packageQjs(name) else {
-            return Error.zipError
+            return QjsError.zipError
         }
         
         zipUrl = url
@@ -199,7 +199,7 @@ public class SifliQjsWatchface: NSObject {
         return w
     }
     
-    func exportBinFiles(watchface: SifliQjsWatchface, isAOD: Bool) -> Error? {
+    func exportBinFiles(watchface: SifliQjsWatchface, isAOD: Bool) -> QjsError? {
         var bitmaps: [String: UIImage] = [:]
         var gifs: [String: URL] = [:]
         
@@ -267,7 +267,7 @@ public class SifliQjsWatchface: NSObject {
             let isTimeHand = path.hasPrefix("pnt")
             let success = QjsFileUtils.exportBin(source: bitmap, isAOD: isAOD, isTimeHand: isTimeHand, fileName: path, watchfaceName: watchface.name)
             if !success {
-                return Error.exportBinError
+                return QjsError.exportBinError
             }
         }
         for (path, gif) in gifs {
@@ -281,7 +281,7 @@ public class SifliQjsWatchface: NSObject {
             }
            
             if !success {
-                return Error.exportBinError
+                return QjsError.exportBinError
             }
         }
         return nil
