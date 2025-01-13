@@ -63,7 +63,7 @@ public class HwOTAUpdateManager: NSObject, SFOTAManagerDelegate {
     }
     
     func scOTA(devIdentifier: String,scZipPath: String) {
-        guard let subDirs = StorageUtils.getFiles(atDirectory: scZipPath) else {
+        guard let subDirs = QjsStorageUtils.getFiles(atDirectory: scZipPath) else {
             firmwareUpdateBlock?(.failure, 0, 0, "固件解压失败")
             print("subDirs == nil 固件解压为空")
             return
@@ -106,11 +106,11 @@ public class HwOTAUpdateManager: NSObject, SFOTAManagerDelegate {
     }
     
     func scZipPath(handleZipFile zipFilePath: String) -> String? {
-        let unzipPath = (StorageUtils.getCahcePath() as NSString).appendingPathComponent("TA")
-        if !StorageUtils.isFileExits(atPath: unzipPath) {
-            StorageUtils.createPath(path: unzipPath)
+        let unzipPath = (QjsStorageUtils.getCahcePath() as NSString).appendingPathComponent("TA")
+        if !QjsStorageUtils.isFileExits(atPath: unzipPath) {
+            QjsStorageUtils.createPath(path: unzipPath)
         } else {
-            StorageUtils.deleteFiles(atPath: unzipPath)
+            QjsStorageUtils.deleteFiles(atPath: unzipPath)
         }
         
         let result = SSZipArchive.unzipFile(atPath: zipFilePath, toDestination: unzipPath)
@@ -119,7 +119,7 @@ public class HwOTAUpdateManager: NSObject, SFOTAManagerDelegate {
             return nil
         }
         
-        guard let subDirs = StorageUtils.getFiles(atDirectory: unzipPath) else {
+        guard let subDirs = QjsStorageUtils.getFiles(atDirectory: unzipPath) else {
             print("ZIP解压后为空")
             return nil
         }

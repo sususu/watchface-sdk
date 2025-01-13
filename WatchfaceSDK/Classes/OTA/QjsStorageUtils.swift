@@ -1,5 +1,5 @@
 //
-//  StorageUtils.swift
+//  QjsStorageUtils.swift
 //  BLE-Swift
 //
 //  Created by SuJiang on 2019/1/8.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class StorageUtils: NSObject {
+public class QjsStorageUtils: NSObject {
     
     
     @objc public static func saveString(_ str: String, forKey key: String) {
@@ -42,8 +42,8 @@ public class StorageUtils: NSObject {
     @objc public static func saveAsFile(forData data: Data, fileName: String) -> URL? {
         let filePath = (getDocPath() as NSString).appendingPathComponent(fileName)
         let url = URL(fileURLWithPath: filePath)
-        if StorageUtils.isFileExits(atPath: filePath) {
-            _ = StorageUtils.deleteFile(atPath: filePath)
+        if QjsStorageUtils.isFileExits(atPath: filePath) {
+            _ = QjsStorageUtils.deleteFile(atPath: filePath)
         }
         do {
             try data.write(to: url, options: .atomic)

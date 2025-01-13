@@ -39,7 +39,7 @@ class HWOTAUpdateViewController: UIViewController {
         // firmwarePath: Please pass in the firmware package path
         // differencePath: Please pass in the differential resource path
         guard let zipPath = scZipPath(handleZipFile: Bundle.main.path(forResource: "HS02_KW266_TA_from_V1.0.6B66_To_V1.0.6B67", ofType: "zip")!) else { return }
-        guard let subDirs = StorageUtils.getFiles(atDirectory: zipPath) else { return }
+        guard let subDirs = QjsStorageUtils.getFiles(atDirectory: zipPath) else { return }
         var firmwarePath: String?
         var differencePath: String?
 
@@ -74,11 +74,11 @@ class HWOTAUpdateViewController: UIViewController {
     func scZipPath(handleZipFile zipFilePath: String) -> String? {
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd_HH_mm_ss"
-        let unzipPath = (StorageUtils.getTempPath() as NSString).appendingPathComponent("TA/\(df.string(from: Date()))")
-        if !StorageUtils.isFileExits(atPath: unzipPath) {
-            StorageUtils.createPath(path: unzipPath)
+        let unzipPath = (QjsStorageUtils.getTempPath() as NSString).appendingPathComponent("TA/\(df.string(from: Date()))")
+        if !QjsStorageUtils.isFileExits(atPath: unzipPath) {
+            QjsStorageUtils.createPath(path: unzipPath)
         } else {
-            StorageUtils.deleteFiles(atPath: unzipPath)
+            QjsStorageUtils.deleteFiles(atPath: unzipPath)
         }
         
         let result = SSZipArchive.unzipFile(atPath: zipFilePath, toDestination: unzipPath)
@@ -87,7 +87,7 @@ class HWOTAUpdateViewController: UIViewController {
             return nil
         }
         
-        guard let subDirs = StorageUtils.getFiles(atDirectory: unzipPath) else {
+        guard let subDirs = QjsStorageUtils.getFiles(atDirectory: unzipPath) else {
             print("ZIP is empty after decompression")
             return nil
         }
