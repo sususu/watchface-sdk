@@ -18,6 +18,8 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
     @objc public var FinishCallback: QjsWatchfaceFinishCallback!
     @objc public var CompressSuccessCallback: QjsCompresSuccessCallback!
     
+    @objc public var isWorking = false;
+    
     @objc public static func getInstance() -> SifliWatchfaceSDK {
         return instance
     }
@@ -37,6 +39,12 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
     @objc public func setPictures(devIdentifier: String,compressSuccessCallback: @escaping QjsCompresSuccessCallback, albums: Array<QjsAlbumModel>, progressCallback: @escaping QjsWatchfaceProgressCallback,finishCallback: @escaping QjsWatchfaceFinishCallback) {
         assert(hadInit, "Please call WatchfaceSDK.getInstance().initSDK(application: UIApplication) before using any API")
         
+        if SifliWatchfaceSDK.instance.isWorking {
+            finishCallback(false, "Repeated task", 190, 190)
+            return
+        }
+        
+        SifliWatchfaceSDK.instance.isWorking = true
         DispatchQueue.global().async { [weak self] in
             SifliWatchfaceSDK.instance.ProgressCallback = progressCallback
             SifliWatchfaceSDK.instance.FinishCallback = finishCallback
@@ -59,10 +67,16 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
                 
             }
             
-            QjsFileUtils.packageQjsAlbum { [weak self]state in
+            QjsFileUtils.packageQjsAlbum { [weak self] state in
                 SifliWatchfaceSDK.instance.CompressSuccessCallback(state)
                 if state {
                     self?.pushAlbum(devIdentifier: devIdentifier)
+                } else {
+                    SifliWatchfaceSDK.instance.FinishCallback(false, "Repeated task", 190, 190)
+                    SifliWatchfaceSDK.instance.ProgressCallback = nil
+                    SifliWatchfaceSDK.instance.FinishCallback = nil
+                    SifliWatchfaceSDK.instance.CompressSuccessCallback = nil
+                    SifliWatchfaceSDK.instance.isWorking = false
                 }
             }
          
@@ -107,6 +121,12 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
     @objc public func setMusicFiles(devIdentifier: String, musicFilePath: URL, compressCallback: @escaping QjsCompresSuccessCallback , progressCallback: @escaping QjsWatchfaceProgressCallback,finishCallback: @escaping QjsWatchfaceFinishCallback) {
         assert(hadInit, "Please call WatchfaceSDK.getInstance().initSDK(application: UIApplication) before using any API")
         
+        if SifliWatchfaceSDK.instance.isWorking {
+            finishCallback(false, "Repeated task", 190, 190)
+            return
+        }
+        
+        SifliWatchfaceSDK.instance.isWorking = true
         DispatchQueue.global().async { [weak self] in
             SifliWatchfaceSDK.instance.ProgressCallback = progressCallback
             SifliWatchfaceSDK.instance.FinishCallback = finishCallback
@@ -116,6 +136,12 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
                 SifliWatchfaceSDK.instance.CompressSuccessCallback(state)
                 if state {
                     self?.pushMusic(devIdentifier: devIdentifier)
+                } else {
+                    SifliWatchfaceSDK.instance.FinishCallback(false, "Repeated task", 190, 190)
+                    SifliWatchfaceSDK.instance.ProgressCallback = nil
+                    SifliWatchfaceSDK.instance.FinishCallback = nil
+                    SifliWatchfaceSDK.instance.CompressSuccessCallback = nil
+                    SifliWatchfaceSDK.instance.isWorking = false
                 }
             }
          
@@ -147,6 +173,13 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
         
         assert(hadInit, "Please call WatchfaceSDK.getInstance().initSDK(application: UIApplication) before using any API")
         
+        if SifliWatchfaceSDK.instance.isWorking {
+            finishCallback(false, "Repeated task", 190, 190)
+            return
+        }
+        
+        SifliWatchfaceSDK.instance.isWorking = true
+        
         CompressSuccessCallback = compressSuccessCallback
         ProgressCallback = progressCallback
         FinishCallback = finishCallback
@@ -162,7 +195,10 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
                 } else {
                     print("zipUrl is nil")
                     SifliWatchfaceSDK.instance.CompressSuccessCallback(false)
-
+                    SifliWatchfaceSDK.instance.ProgressCallback = nil
+                    SifliWatchfaceSDK.instance.FinishCallback = nil
+                    SifliWatchfaceSDK.instance.CompressSuccessCallback = nil
+                    SifliWatchfaceSDK.instance.isWorking = false
                 }
             }
         }
@@ -181,6 +217,12 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
         
         assert(hadInit, "Please call WatchfaceSDK.getInstance().initSDK(application: UIApplication) before using any API")
         
+        if SifliWatchfaceSDK.instance.isWorking {
+            finishCallback(false, "Repeated task", 190, 190)
+            return
+        }
+        SifliWatchfaceSDK.instance.isWorking = true
+        
         ProgressCallback = progressCallback
         FinishCallback = finishCallback
         
@@ -192,6 +234,12 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
         self.pushManager.delegate = self
         
         assert(hadInit, "Please call WatchfaceSDK.getInstance().initSDK(application: UIApplication) before using any API")
+        
+        if SifliWatchfaceSDK.instance.isWorking {
+            finishCallback(false, "Repeated task", 190, 190)
+            return
+        }
+        SifliWatchfaceSDK.instance.isWorking = true
         
         ProgressCallback = progressCallback
         FinishCallback = finishCallback
@@ -211,6 +259,10 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
     @objc public func stop() {
         assert(hadInit, "Please call WatchfaceSDK.getInstance().initSDK(application: UIApplication) before using any API")
         self.pushManager.stop()
+        SifliWatchfaceSDK.instance.ProgressCallback = nil
+        SifliWatchfaceSDK.instance.FinishCallback = nil
+        SifliWatchfaceSDK.instance.CompressSuccessCallback = nil
+        SifliWatchfaceSDK.instance.isWorking = false
     }
 }
 
