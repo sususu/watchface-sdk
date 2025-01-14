@@ -259,8 +259,6 @@ import eZIPSDK
                     if progress >= 1.0 {
                         print("mp3压缩完成 Zip file path: \(zipFilePath.path)")
                         completion(true)
-                    } else {
-                        completion(false)
                     }
                 }
             })
