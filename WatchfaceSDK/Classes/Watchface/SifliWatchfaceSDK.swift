@@ -14,9 +14,9 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
     @objc public var width: Double = 466.0
     @objc public var height: Double = 466.0
     
-    @objc public var ProgressCallback: QjsWatchfaceProgressCallback!
-    @objc public var FinishCallback: QjsWatchfaceFinishCallback!
-    @objc public var CompressSuccessCallback: QjsCompresSuccessCallback!
+    @objc public var ProgressCallback: QjsWatchfaceProgressCallback?
+    @objc public var FinishCallback: QjsWatchfaceFinishCallback?
+    @objc public var CompressSuccessCallback: QjsCompresSuccessCallback?
     
     @objc public var isWorking = false;
     
@@ -68,11 +68,11 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
             }
             
             QjsFileUtils.packageQjsAlbum { [weak self] state in
-                SifliWatchfaceSDK.instance.CompressSuccessCallback(state)
+                SifliWatchfaceSDK.instance.CompressSuccessCallback?(state)
                 if state {
                     self?.pushAlbum(devIdentifier: devIdentifier)
                 } else {
-                    SifliWatchfaceSDK.instance.FinishCallback(false, "Repeated task", 190, 190)
+                    SifliWatchfaceSDK.instance.FinishCallback?(false, "Repeated task", 190, 190)
                     SifliWatchfaceSDK.instance.ProgressCallback = nil
                     SifliWatchfaceSDK.instance.FinishCallback = nil
                     SifliWatchfaceSDK.instance.CompressSuccessCallback = nil
@@ -133,11 +133,11 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
             SifliWatchfaceSDK.instance.CompressSuccessCallback = compressCallback
             
             QjsFileUtils.packageQjsMp3(mp3FilePath: musicFilePath) { [weak self] state in
-                SifliWatchfaceSDK.instance.CompressSuccessCallback(state)
+                SifliWatchfaceSDK.instance.CompressSuccessCallback?(state)
                 if state {
                     self?.pushMusic(devIdentifier: devIdentifier)
                 } else {
-                    SifliWatchfaceSDK.instance.FinishCallback(false, "Repeated task", 190, 190)
+                    SifliWatchfaceSDK.instance.FinishCallback?(false, "Repeated task", 190, 190)
                     SifliWatchfaceSDK.instance.ProgressCallback = nil
                     SifliWatchfaceSDK.instance.FinishCallback = nil
                     SifliWatchfaceSDK.instance.CompressSuccessCallback = nil
@@ -187,14 +187,14 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
         watchface.makeZip { [weak self]zipUrl, error in
             if (error != nil) {
                 print("zip compression error:\(String(describing: error))")
-                SifliWatchfaceSDK.instance.CompressSuccessCallback(false);
+                SifliWatchfaceSDK.instance.CompressSuccessCallback?(false);
             } else {
                 if let zip: URL = zipUrl {
-                    SifliWatchfaceSDK.instance.CompressSuccessCallback(true)
+                    SifliWatchfaceSDK.instance.CompressSuccessCallback?(true)
                     self?.syncZipFile(devIdentifier: devIdentifier, filePath: zip)
                 } else {
                     print("zipUrl is nil")
-                    SifliWatchfaceSDK.instance.CompressSuccessCallback(false)
+                    SifliWatchfaceSDK.instance.CompressSuccessCallback?(false)
                     SifliWatchfaceSDK.instance.ProgressCallback = nil
                     SifliWatchfaceSDK.instance.FinishCallback = nil
                     SifliWatchfaceSDK.instance.CompressSuccessCallback = nil
@@ -275,7 +275,7 @@ extension SifliWatchfaceSDK: SFDialPlateManagerDelegate {
     
     public func dialPlateManager(manager: SFDialPlateSDK.SFDialPlateManager, progress: Int) {
         print("推送进度:\(progress)%")
-        SifliWatchfaceSDK.instance.ProgressCallback(progress)
+        SifliWatchfaceSDK.instance.ProgressCallback?(progress)
     }
     
     public func dialPlateManager(manager: SFDialPlateSDK.SFDialPlateManager, complete error: SFDialPlateSDK.SFError?) {
@@ -284,10 +284,10 @@ extension SifliWatchfaceSDK: SFDialPlateManagerDelegate {
             print("推送失败:\(err)")
             let errInfo: String = err.errInfo
             
-            SifliWatchfaceSDK.instance.FinishCallback(false,errInfo,err.errType.rawValue,error?.devErrorCode ?? NSNumber(value: 0))
+            SifliWatchfaceSDK.instance.FinishCallback?(false,errInfo,err.errType.rawValue,error?.devErrorCode ?? NSNumber(value: 0))
             return
         }
-        SifliWatchfaceSDK.instance.FinishCallback(true,"",0,error?.devErrorCode ?? NSNumber(value: 0))
+        SifliWatchfaceSDK.instance.FinishCallback?(true,"",0,error?.devErrorCode ?? NSNumber(value: 0))
         print("推送成功")
     }
 }
