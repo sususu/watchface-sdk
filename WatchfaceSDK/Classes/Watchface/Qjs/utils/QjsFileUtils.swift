@@ -231,17 +231,19 @@ import eZIPSDK
         
         do {
             try Zip.zipFiles(paths: [mp3DirectoryPath], zipFilePath: outputFilePath, password: nil, progress: { progress in
-                print("mp3压缩进度：\(progress)")
-                if progress >= 1.0 {
-                    print("mp3压缩完成 Zip file path: \(outputFilePath.path)")
-                    completion(true)
-                } else {
-                    completion(false)
+                DispatchQueue.main.async {
+                    print("mp3压缩进度：\(progress)")
+                    if progress >= 1.0 {
+                        print("mp3压缩完成 Zip file path: \(outputFilePath.path)")
+                        completion(true)
+                    }
                 }
             })
         } catch {
-            print("Error mp3 zipping files: \(error.localizedDescription)")
-            completion(false)
+            DispatchQueue.main.async {
+                print("Error mp3 zipping files: \(error.localizedDescription)")
+                completion(false)
+            }
         }
         
     }
