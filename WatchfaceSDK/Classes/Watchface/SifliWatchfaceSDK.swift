@@ -231,6 +231,10 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
     }
     
     @objc public func syncZipFile(devIdentifier: String, filePath: URL, type: Int, progressCallback: @escaping QjsWatchfaceProgressCallback, finishCallback: @escaping QjsWatchfaceFinishCallback) {
+        syncZipFile(devIdentifier: devIdentifier, filePath: filePath, type: type, byteAlign: false, progressCallback: progressCallback, finishCallback: finishCallback)
+    }
+    
+    @objc public func syncZipFile(devIdentifier: String, filePath: URL, type: Int, byteAlign: Bool, progressCallback: @escaping QjsWatchfaceProgressCallback, finishCallback: @escaping QjsWatchfaceFinishCallback) {
         self.pushManager.delegate = self
         
         assert(hadInit, "Please call WatchfaceSDK.getInstance().initSDK(application: UIApplication) before using any API")
@@ -245,7 +249,7 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
         FinishCallback = finishCallback
         
         //开启推送 在线表盘 withByteAlign 传 false
-        self.pushManager.pushDialPlate(devIdentifier: devIdentifier, type: UInt16(type), zipPath: filePath,withByteAlign: false)
+        self.pushManager.pushDialPlate(devIdentifier: devIdentifier, type: UInt16(type), zipPath: filePath,withByteAlign: byteAlign)
     }
     
     
