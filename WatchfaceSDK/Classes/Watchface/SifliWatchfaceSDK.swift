@@ -280,6 +280,7 @@ extension SifliWatchfaceSDK: SFDialPlateManagerDelegate {
     
     public func dialPlateManager(manager: SFDialPlateSDK.SFDialPlateManager, complete error: SFDialPlateSDK.SFError?) {
 //        self.isOtaWatchfaceing = false
+        SifliWatchfaceSDK.instance.isWorking = false
         if let err = error {
             print("推送失败:\(err)")
             let errInfo: String = err.errInfo
