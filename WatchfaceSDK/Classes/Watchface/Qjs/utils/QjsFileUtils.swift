@@ -255,16 +255,20 @@ import eZIPSDK
         do {
             try Zip.zipFiles(paths: [folderPath], zipFilePath: zipFilePath, password: nil, progress: { progress in
                 print("mp3压缩进度：\(progress)")
-                if progress >= 1.0 {
-                    print("mp3压缩完成 Zip file path: \(zipFilePath.path)")
-                    completion(true)
-                } else {
-                    completion(false)
+                DispatchQueue.main.async {
+                    if progress >= 1.0 {
+                        print("mp3压缩完成 Zip file path: \(zipFilePath.path)")
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
                 }
             })
         } catch {
             print("Error mp3 zipping files: \(error.localizedDescription)")
-            completion(false)
+            DispatchQueue.main.async {
+                completion(false)
+            }
         }
     }
     
