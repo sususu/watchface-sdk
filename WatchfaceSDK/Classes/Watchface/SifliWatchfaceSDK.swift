@@ -187,18 +187,19 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
         watchface.makeZip { [weak self]zipUrl, error in
             if (error != nil) {
                 print("zip compression error:\(String(describing: error))")
-                SifliWatchfaceSDK.instance.CompressSuccessCallback?(false);
+                SifliWatchfaceSDK.instance.isWorking = false
+                SifliWatchfaceSDK.instance.CompressSuccessCallback?(false)
             } else {
                 if let zip: URL = zipUrl {
                     SifliWatchfaceSDK.instance.CompressSuccessCallback?(true)
                     self?.syncZipFile(devIdentifier: devIdentifier, filePath: zip)
                 } else {
                     print("zipUrl is nil")
+                    SifliWatchfaceSDK.instance.isWorking = false
                     SifliWatchfaceSDK.instance.CompressSuccessCallback?(false)
                     SifliWatchfaceSDK.instance.ProgressCallback = nil
                     SifliWatchfaceSDK.instance.FinishCallback = nil
                     SifliWatchfaceSDK.instance.CompressSuccessCallback = nil
-                    SifliWatchfaceSDK.instance.isWorking = false
                 }
             }
         }
@@ -288,7 +289,6 @@ extension SifliWatchfaceSDK: SFDialPlateManagerDelegate {
         if let err = error {
             print("推送失败:\(err)")
             let errInfo: String = err.errInfo
-            
             SifliWatchfaceSDK.instance.FinishCallback?(false,errInfo,err.errType.rawValue,error?.devErrorCode ?? NSNumber(value: 0))
             return
         }
