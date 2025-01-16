@@ -17,6 +17,7 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
     @objc public var ProgressCallback: QjsWatchfaceProgressCallback?
     @objc public var FinishCallback: QjsWatchfaceFinishCallback?
     @objc public var CompressSuccessCallback: QjsCompresSuccessCallback?
+    private var customWatchface: SlifiCustomWatchface?
     
     @objc public var isWorking = false;
     
@@ -184,7 +185,8 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
         ProgressCallback = progressCallback
         FinishCallback = finishCallback
         
-        watchface.makeZip { [weak self]zipUrl, error in
+        self.customWatchface = watchface
+        self.customWatchface?.makeZip { [weak self]zipUrl, error in
             if (error != nil) {
                 print("zip compression error:\(String(describing: error))")
                 SifliWatchfaceSDK.instance.isWorking = false
@@ -200,6 +202,7 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
                     SifliWatchfaceSDK.instance.ProgressCallback = nil
                     SifliWatchfaceSDK.instance.FinishCallback = nil
                     SifliWatchfaceSDK.instance.CompressSuccessCallback = nil
+                    SifliWatchfaceSDK.instance.customWatchface = nil
                 }
             }
         }
@@ -286,6 +289,7 @@ extension SifliWatchfaceSDK: SFDialPlateManagerDelegate {
     public func dialPlateManager(manager: SFDialPlateSDK.SFDialPlateManager, complete error: SFDialPlateSDK.SFError?) {
 //        self.isOtaWatchfaceing = false
         SifliWatchfaceSDK.instance.isWorking = false
+        SifliWatchfaceSDK.instance.customWatchface = nil
         if let err = error {
             print("推送失败:\(err)")
             let errInfo: String = err.errInfo
