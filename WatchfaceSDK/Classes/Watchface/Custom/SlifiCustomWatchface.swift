@@ -82,9 +82,6 @@ public typealias WatchfaceCallback = (URL?, QjsError?) ->()
         watchface.thumbnail = thumbnailImage
         watchface.widgetList = qjsWidgets
         watchface.aod = aod
-        watchface.makeZip { url, err in
-            callback(url, err)
-        }
         self.qjsWf = watchface;
         self.qjsWf?.makeZip(callback: {[weak self] url, err in
             callback(url, err)
