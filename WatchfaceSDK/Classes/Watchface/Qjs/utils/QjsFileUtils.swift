@@ -3,6 +3,7 @@ import UIKit
 import ImageIO
 import Zip
 import eZIPSDK
+import SSZipArchive
 
 @objc public class QjsFileUtils : NSObject {
     static let TAG = "FileUtils"
@@ -210,6 +211,39 @@ import eZIPSDK
         return url.appendingPathComponent("photo.zip")
     }
     
+    static func getMapFilesOutputZipFilePath() -> URL {
+        let path = NSTemporaryDirectory().appending("offline_map")
+        let url = URL(fileURLWithPath: path)
+        deleteDirectory(directory: url)
+        let fileManager = FileManager.default
+        if !fileManager.fileExists(atPath: url.path) {
+            do {
+                try fileManager.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print("Error creating directory: \(error)")
+            }
+        }
+        return url.appendingPathComponent("map.zip")
+    }
+    
+    static func getMapFilesUnzipPath() -> URL {
+        let path = NSTemporaryDirectory().appending("offline_map_unzip")
+        let url = URL(fileURLWithPath: path)
+
+        deleteDirectory(directory: url)
+        
+        let fileManager = FileManager.default
+        if !fileManager.fileExists(atPath: url.path) {
+            do {
+                try fileManager.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print("Error creating directory: \(error)")
+            }
+        }
+        return url
+    }
+    
+    
     //压缩mp3文件
     @objc static func packageQjsMp3(mp3FilePath: URL, completion: @escaping QjsCompressCallback) {
         // 移除 mp3FilePath 的最后一个路径组件
@@ -270,6 +304,29 @@ import eZIPSDK
                 completion(false)
             }
         }
+    }
+    
+    static func packageMapFilesZip(type: Int, mapPath: URL) -> String? {
+        let zipFilePath: URL = getMapFilesOutputZipFilePath()
+        let unzipPath: URL = getMapFilesUnzipPath()
+        
+        var folderPath = unzipPath.appendingPathComponent("music/MAP/map")
+        if type == 1 {
+            folderPath = unzipPath.appendingPathComponent("nanshan")
+        } else {
+            folderPath = unzipPath.appendingPathComponent("nanshan-cm")
+        }
+        let result = SSZipArchive.unzipFile(atPath: mapPath.absoluteString, toDestination: folderPath.absoluteString)
+        if !result {
+            print("Failed to decompress the file. There may be an error downloading the file. Please re-download")
+            return nil
+        }
+        let zipResult = SSZipArchive.createZipFile(atPath: zipFilePath.absoluteString, withContentsOfDirectory: unzipPath.absoluteString, keepParentDirectory: true)
+        if !zipResult {
+            print("create zip file failed")
+            return nil
+        }
+        return zipFilePath.absoluteString
     }
     
     static func changeImageColor(source: UIImage, color: UIColor) -> UIImage? {

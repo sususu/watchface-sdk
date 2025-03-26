@@ -163,6 +163,34 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
         
     }
     
+    @objc public func pushOfflineMap(devIdentifier: String, mapZipFilePath: URL, compressCallback: @escaping QjsCompresSuccessCallback, progressCallback: @escaping QjsWatchfaceProgressCallback, finishCallback: @escaping QjsWatchfaceFinishCallback) {
+        assert(hadInit, "Please call WatchfaceSDK.getInstance().initSDK(application: UIApplication) before using any API")
+        if SifliWatchfaceSDK.instance.isWorking {
+            finishCallback(false, "Repeated task", 190, 190)
+            return
+        }
+        SifliWatchfaceSDK.instance.isWorking = true
+        DispatchQueue.global().async { [weak self] in
+            guard let zipfile = QjsFileUtils.packageMapFilesZip(type: 1, mapPath: mapZipFilePath) else {
+                DispatchQueue.main.async {
+                    finishCallback(false, "Repeated task", 190, 190)
+                    SifliWatchfaceSDK.instance.isWorking = false
+                }
+                return
+            }
+            SifliWatchfaceSDK.instance.ProgressCallback = progressCallback
+            SifliWatchfaceSDK.instance.FinishCallback = finishCallback
+            SifliWatchfaceSDK.instance.CompressSuccessCallback = compressCallback
+            self?.doPushMapData(devIdentifier: devIdentifier, zipFile: zipfile)
+        }
+    }
+    
+    private func doPushMapData(devIdentifier: String, zipFile: String) {
+        self.pushManager.delegate = self
+        //开启推送
+        self.pushManager.pushDialPlate(devIdentifier: devIdentifier, type: 3, zipPath: URL(fileURLWithPath: zipFile), withByteAlign: false)
+    }
+    
     //MARK: - Synchronized Custom Dial
     /// - Parameters:
     ///   - devIdentifier: The identifier string of the target device. Through CBPeripheral. Identifier. UuidString acquisition
