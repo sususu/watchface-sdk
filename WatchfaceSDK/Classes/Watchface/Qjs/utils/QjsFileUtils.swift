@@ -307,8 +307,9 @@ import SSZipArchive
     }
     
     static func packageMapFilesZip(type: Int, mapPath: URL) -> String? {
-        let zipFilePath: URL = getMapFilesOutputZipFilePath()
-        let unzipPath: URL = getMapFilesUnzipPath()
+        let fileManager = FileManager.default
+        let zipFilePath = getMapFilesOutputZipFilePath()
+        let unzipPath = getMapFilesUnzipPath()
         
         var folderPath = unzipPath.appendingPathComponent("music/MAP/map")
         if type == 1 {
@@ -316,17 +317,27 @@ import SSZipArchive
         } else {
             folderPath = unzipPath.appendingPathComponent("nanshan-cm")
         }
-        let result = SSZipArchive.unzipFile(atPath: mapPath.absoluteString, toDestination: folderPath.absoluteString)
+        
+        do {
+            try fileManager.createDirectory(at: folderPath, withIntermediateDirectories: true, attributes: nil)
+        } catch {
+            print("Failed to create directory: \(error)")
+            return nil
+        }
+        
+        let result = SSZipArchive.unzipFile(atPath: mapPath.path, toDestination: folderPath.path)
         if !result {
-            print("Failed to decompress the file. There may be an error downloading the file. Please re-download")
+            print("解压失败：文件可能损坏或路径错误")
             return nil
         }
-        let zipResult = SSZipArchive.createZipFile(atPath: zipFilePath.absoluteString, withContentsOfDirectory: unzipPath.absoluteString, keepParentDirectory: true)
+        
+        let zipResult = SSZipArchive.createZipFile(atPath: zipFilePath.path, withContentsOfDirectory: unzipPath.path)
         if !zipResult {
-            print("create zip file failed")
+            print("创建 ZIP 文件失败")
             return nil
         }
-        return zipFilePath.absoluteString
+        
+        return zipFilePath.path
     }
     
     static func changeImageColor(source: UIImage, color: UIColor) -> UIImage? {
