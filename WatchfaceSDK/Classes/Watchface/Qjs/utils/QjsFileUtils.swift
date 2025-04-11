@@ -311,13 +311,12 @@ import SSZipArchive
         let zipFilePath = getMapFilesOutputZipFilePath()
         let unzipPath = getMapFilesUnzipPath()
         
-        var folderPath = unzipPath.appendingPathComponent("music/MAP/map")
-        if type == 1 {
-            folderPath = unzipPath.appendingPathComponent("nanshan")
-        } else {
-            folderPath = unzipPath.appendingPathComponent("nanshan-cm")
-        }
+        let baseMapPath = unzipPath.appendingPathComponent("music/MAP/map")
         
+        let subfolderName = type == 1 ? "nanshan" : "nanshan-cm"
+        let folderPath = baseMapPath.appendingPathComponent(subfolderName)
+        
+        // 确保目标目录存在
         do {
             try fileManager.createDirectory(at: folderPath, withIntermediateDirectories: true, attributes: nil)
         } catch {
@@ -325,12 +324,14 @@ import SSZipArchive
             return nil
         }
         
+        // 解压文件到目标目录
         let result = SSZipArchive.unzipFile(atPath: mapPath.path, toDestination: folderPath.path)
         if !result {
             print("解压失败：文件可能损坏或路径错误")
             return nil
         }
         
+        // 重新生成 ZIP 文件（包含整个解压后的目录结构）
         let zipResult = SSZipArchive.createZipFile(atPath: zipFilePath.path, withContentsOfDirectory: unzipPath.path)
         if !zipResult {
             print("创建 ZIP 文件失败")
