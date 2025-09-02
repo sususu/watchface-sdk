@@ -28,6 +28,7 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
     @objc public func initSDK() {
         hadInit = true
         self.pushManager = SFDialPlateManager.share
+        self.pushManager = SFDialPlateManager.share
     }
     
     //MARK: - Synchronized album
@@ -108,7 +109,11 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
         let zipFilePath = tempDirectoryURL.appendingPathComponent(albumTmpDir)
         
         //开启推送
-        self.pushManager.pushDialPlate(devIdentifier: devIdentifier, type: 3, zipPath: zipFilePath,withByteAlign: true)
+        if isBetterPhone() {
+            self.pushManager.pushDialPlate(devIdentifier: devIdentifier, type: 3, zipPath: zipFilePath, maxFileSliceLength: 8 * 1024, withByteAlign: true)
+        } else {
+            self.pushManager.pushDialPlate(devIdentifier: devIdentifier, type: 3, zipPath: zipFilePath, withByteAlign: true)
+        }
         
     }
     
@@ -159,8 +164,11 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
         let zipFilePath = tempDirectoryURL.appendingPathComponent(mp3TmpDir)
         
         //开启推送
-        self.pushManager.pushDialPlate(devIdentifier: devIdentifier, type: 4, zipPath: zipFilePath,withByteAlign: true)
-        
+        if isBetterPhone() {
+            self.pushManager.pushDialPlate(devIdentifier: devIdentifier, type: 4, zipPath: zipFilePath, maxFileSliceLength: 8 * 1024, withByteAlign: true)
+        } else {
+            self.pushManager.pushDialPlate(devIdentifier: devIdentifier, type: 4, zipPath: zipFilePath, withByteAlign: true)
+        }
     }
     
     @objc public func pushOfflineMap(devIdentifier: String, mapZipFilePath: URL, compressCallback: @escaping QjsCompresSuccessCallback, progressCallback: @escaping QjsWatchfaceProgressCallback, finishCallback: @escaping QjsWatchfaceFinishCallback) {
@@ -188,7 +196,11 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
     private func doPushMapData(devIdentifier: String, zipFile: String) {
         self.pushManager.delegate = self
         //开启推送
-        self.pushManager.pushDialPlate(devIdentifier: devIdentifier, type: 3, zipPath: URL(fileURLWithPath: zipFile), withByteAlign: false)
+        if isBetterPhone() {
+            self.pushManager.pushDialPlate(devIdentifier: devIdentifier, type: 3, zipPath: URL(fileURLWithPath: zipFile), maxFileSliceLength: 8 * 1024, withByteAlign: false)
+        } else {
+            self.pushManager.pushDialPlate(devIdentifier: devIdentifier, type: 3, zipPath: URL(fileURLWithPath: zipFile), withByteAlign: false)
+        }
     }
     
     //MARK: - Synchronized Custom Dial
@@ -259,7 +271,11 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
         FinishCallback = finishCallback
         
         //开启推送 在线表盘 withByteAlign 传 false
-        self.pushManager.pushDialPlate(devIdentifier: devIdentifier, type: 5, zipPath: filePath,withByteAlign: false)
+        if isBetterPhone() {
+            self.pushManager.pushDialPlate(devIdentifier: devIdentifier, type: 5, zipPath: filePath, maxFileSliceLength: 8 * 1024,withByteAlign: false)
+        } else {
+            self.pushManager.pushDialPlate(devIdentifier: devIdentifier, type: 5, zipPath: filePath,withByteAlign: false)
+        }
     }
     
     @objc public func syncZipFile(devIdentifier: String, filePath: URL, type: Int, progressCallback: @escaping QjsWatchfaceProgressCallback, finishCallback: @escaping QjsWatchfaceFinishCallback) {
@@ -281,14 +297,22 @@ public typealias QjsCompresSuccessCallback = (Bool) ->()
         FinishCallback = finishCallback
         
         //开启推送 在线表盘 withByteAlign 传 false
-        self.pushManager.pushDialPlate(devIdentifier: devIdentifier, type: UInt16(type), zipPath: filePath,withByteAlign: byteAlign)
+        if isBetterPhone() {
+            self.pushManager.pushDialPlate(devIdentifier: devIdentifier, type: UInt16(type), zipPath: filePath, maxFileSliceLength: 8 * 1024,withByteAlign: byteAlign)
+        } else {
+            self.pushManager.pushDialPlate(devIdentifier: devIdentifier, type: UInt16(type), zipPath: filePath,withByteAlign: byteAlign)
+        }
     }
     
     
     private func syncZipFile(devIdentifier: String, filePath: URL) {
         self.pushManager.delegate = self
         //开启推送
-        self.pushManager.pushDialPlate(devIdentifier: devIdentifier, type: 5, zipPath: filePath,withByteAlign: true)
+        if isBetterPhone() {
+            self.pushManager.pushDialPlate(devIdentifier: devIdentifier, type: 5, zipPath: filePath, maxFileSliceLength: 8 * 1024, withByteAlign: true)
+        } else {
+            self.pushManager.pushDialPlate(devIdentifier: devIdentifier, type: 5, zipPath: filePath, withByteAlign: true)
+        }
     }
     
     /// Abort task。
@@ -327,4 +351,24 @@ extension SifliWatchfaceSDK: SFDialPlateManagerDelegate {
         SifliWatchfaceSDK.instance.FinishCallback?(true,"",0,error?.devErrorCode ?? NSNumber(value: 0))
         print("推送成功")
     }
+    
+    private func isBetterPhone() -> Bool {
+        return hasTrueToneDisplay() && hasA11ChipOrNewer();
+    }
+    
+    private func hasTrueToneDisplay() -> Bool {
+        guard #available(iOS 10.0, *) else {
+            return false
+        }
+        return UIScreen.main.traitCollection.displayGamut == .P3
+    }
+    
+    /// 检查设备是否具有 A11 芯片或更新的处理器
+    /// - Returns: 是 A11 或更新芯片返回 true，否则返回 false
+    /// - Note: A11 Bionic 芯片（iPhone 8/8 Plus/X）有 6 个核心
+    private func hasA11ChipOrNewer() -> Bool {
+        let processorCount = ProcessInfo.processInfo.processorCount
+        return processorCount >= 6
+    }
+    
 }
