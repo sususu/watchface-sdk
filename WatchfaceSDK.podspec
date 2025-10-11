@@ -10,7 +10,7 @@ TODO: Add long description of the pod here.
   s.homepage         = 'https://github.com/HWdan/WatchfaceSDK'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'HWdan' => 'huangwentai@huawo-wear.com' }
-  s.source           = { :git => 'https://gitee.com/huangwt1573/watchface-sdk.git', :tag => s.version.to_s }
+  s.source           = { :git => 'http://192.168.12.244/ios/watchfacesdk.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '9.0'
   s.swift_version    = '4.2'
